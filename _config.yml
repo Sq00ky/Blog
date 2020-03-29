@@ -1,19 +1,19 @@
 # Site settings
-title: Lorem Ipsum - Web Developer
-description: "A blog about lorem ipsum ..."
-baseurl: "/space-jekyll-template" # for test: remove string '/space-jekyll-template' to ''
-url: "http://victorvoid.github.io/space-jekyll-template/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
+title: SpookySec
+description: "root@SpookySec:~#"
+baseurl: "/" # for test: remove string '/space-jekyll-template' to ''
+url: "https://blog.spookysec.net/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
 
 # User settings
-username: lorem ipsum
-user_title: Lorem Ipsum - FrontEnd
-email: lorem.lorem@ipsum.com
-twitter_username: loremipsum
-github_username:  loremipsum
-gplus_username:  loremipsum
-linkedin_public_url: loremipsum # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
-disqus_username: loremipsum
-profile_picture: https://68.media.tumblr.com/93f384858e9273d5b980b418e2f2f4d5/tumblr_o5i2aybLJG1uapsfmo2_250.png
+username: Sq00ky
+user_title: Spooks
+email: ronnie@spookysec.net
+twitter_username: NekoS3c
+github_username:  Sq00ky
+gplus_username: 
+linkedin_public_url: rBartwitz # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
+disqus_username:
+profile_picture: https://pbs.twimg.com/profile_images/1242978105255493634/yDs0y3tg_400x400.jpg
 
 # Build settings
 markdown: kramdown
@@ -47,11 +47,11 @@ links:
       key_trigger: 5
   section_2:
     - title: github
-      url: http://www.github.com/victorvoid
+      url: https://github.com/Sq00ky
       new_tab: true
       key_trigger: g
     - title: twitter
-      url: http://www.twitter.com/victorvoid
+      url: https://twitter.com/NekoS3c
       key_trigger: t
     - title: search
       url: ""
