@@ -45,11 +45,11 @@ links:
       key_trigger: 5
   section_2:
     - title: github
-      url: Sq00ky
+      url: https://github.com/Sq00ky
       new_tab: true
       key_trigger: g
     - title: twitter
-      url: NekoS3c
+      url: https://twitter.com/NekoS3c
       key_trigger: t
     - title: search
       url: ""
