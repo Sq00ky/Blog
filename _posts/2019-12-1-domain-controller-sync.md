@@ -22,7 +22,7 @@ The really nice thing about Domain Controllers is that they do exactly what they
 
 Within an Active Directory network, it's useful to have a backup Domain Controller so if your primary fails, you'll have a second one to back you up. Perhaps if your workplace gets hit on Ransomware, you may have a hot site so that you can be back up in running in a few minutes. These are all valid reasons that a user account might have a very dangerous set of account permissions called "Replicating Directory Changes", "Replicating Directory Changes All", and lastly, "Replicating Directory Changes in Filtered Set". This is commonly refered to as "DC Sync", or Domain Controller Sync. 
 
-<img src="https://spookysec.net/img/dcsync.png">
+<img src="https://blog.spookysec.net/img/dcsync.png">
 
 What these given permissions allow for is all of the user accounts stored on the primary Domain Controller to be Sync'd with this user account. If your DC's hard drive fails, this could be a life saving thing to have. If an attacker gains access to this user account, they have all of your domains password hashes. At that point you shoudl pray you have some sort of multi factor authenthication system within your network. For example, a Yubikey or Duo.
 
