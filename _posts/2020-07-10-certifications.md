@@ -67,7 +67,7 @@ CompTIA is a vendor neutral, non-profit Certification body designed to help impr
 
 ## EC-Council
 
-EC-Council is a renound organization thanks to the DoD, they offer several well known certifications such as C|HFI (Certified Hacking Forensics Invesitigator), E|CIH (Certified Incident Handler), and C|EH (Certified Ethical Hacker) amoung many others. They also offer several degree programs through EC-Council's University program.
+EC-Council is a renound organization thanks to the DoD, they offer several well known certifications such as C\|HFI (Certified Hacking Forensics Invesitigator), E\|CIH (Certified Incident Handler), and C\|EH (Certified Ethical Hacker) amoung many others. They also offer several degree programs through EC-Council's University program.
 
 ### CEH
 
