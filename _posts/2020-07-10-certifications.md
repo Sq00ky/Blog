@@ -129,7 +129,7 @@ Cisco is one of the most renowned Networking Equipment vendors and own about 60-
 
 **My thought's and opinions** - This certification is for *someone*, I think that person is a beginner, absolute begineer looking to get familiarized with networking and networking technologies. I wouldn't recommend it to many people.
 
-# Bonus Free Courses/Certifications/Certificates of Completion 
+# Bonus: Free Courses/Certifications/Certificates of Completion 
 
 ## Fortinet
 
