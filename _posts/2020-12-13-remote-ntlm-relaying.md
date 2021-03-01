@@ -48,12 +48,13 @@ Ensure that all of the commands executed without failure. If successful, they sh
 After all the services are disabled, restart the victim machine. After the machine restarts, run a quick port-scan on port 445 and ensure that it is marked as "Closed". This means you successfully disabled all the SMB-related services on the victim host. Next, you want to execute a Meterpreter shell on the target host, so we can setup a Remote Port Forward. We can do so with the following command in a Meterpreter Session:
 
 ```
-portfwd add -R -L 127.0.0.1 -l 445 -p 445
+portfwd add -R -L 0.0.0.0 -l 445 -p 445
+
 ```
 
 This will capture traffic destined for our victim on remote port 445 and forward it to local port 445. 
 
-![portfwd.png](https://raw.githubusercontent.com/Sq00ky/SpookySec-Blog/master/img/portfwd.png)
+![portfwd.png](https://puu.sh/H5I5Z/77cddab386.png)
 
 Next we need to mascarade the host that our traffic is coming from and make it appear that it's coming from the victim and not us. We can do this with Metasploit's SOCKS5 server. Simply execute "use auxiliary/server/socks5" and "run" and our SOCKS5 server is ready to go. Lastly, we need to add the SOCKS5 proxy to our ProxyChains config, it's default config location on Kali is /etc/proxychains.conf. We simply need to add comment the last SOCKS4 proxy out and add "socks5 127.0.0.1 1080" and we're ready to rock.
 
