@@ -56,15 +56,13 @@ This will capture traffic destined for our victim on remote port 445 and forward
 
 ![portfwd.png](https://puu.sh/H5I5Z/77cddab386.png)
 
-Next we need to mascarade the host that our traffic is coming from and make it appear that it's coming from the victim and not us. We can do this with Metasploit's SOCKS5 server. Simply execute "use auxiliary/server/socks5" and "run" and our SOCKS5 server is ready to go. Lastly, we need to add the SOCKS5 proxy to our ProxyChains config, it's default config location on Kali is /etc/proxychains.conf. We simply need to add comment the last SOCKS4 proxy out and add "socks5 127.0.0.1 1080" and we're ready to rock.
-
 All thats left is to proxy NTLMRelayX through proxychains and wait for the hashes to roll in. In a normal corporate network it may take a bit for a user with Local Administrative access to your target to attempt to access the SMB server, but remember, if it's an automounted script, you shouldn't have to wait too long. Back to NTLMRelayX
 
 ```
-proxychains ntlmrelayx.py -t smb://10.200.69.30 -smb2support
+ntlmrelayx.py -t smb://10.200.69.30 -smb2support
 ```
 
-![success.png](https://raw.githubusercontent.com/Sq00ky/SpookySec-Blog/master/img/success.png)
+![success.png](https://i.imgur.com/Nel0cp9.png)
 
 Some trouleshooting and tweaking may be required for this to work, this exploit is very tricky to get working and takes a lot of time and patience. Personally, I recommend looking into tweaking the Port Forwarding settings, because I think there may be a better way of doing it. Coming soon Myself and [Cryillic](https://twitter.com/Real_Cryillic) will be releasing a lab based off of this attack vector called "Holo". as of 12/15/2020 it's currently in beta testing and should be released (hopefully) by Christmas :). Keep an eye on TryHackMe's [Hacktivites Page](https://tryhackme.com/hacktivities) for an estimated release date.
 
