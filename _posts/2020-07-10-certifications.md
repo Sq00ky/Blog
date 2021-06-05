@@ -129,8 +129,17 @@ Cisco is one of the most renowned Networking Equipment vendors and own about 60-
 
 **CCNA** - I took the CCNA when it was still CCNA R&S and not on the new CCNA branch. There are a ton of new topics that are very important such as Network Automation, Access APIs, and SDN. These are all key topics in the evergrowing Industry. I highly recommend taking a Networking certification, and if you choose to take one, the CCNA is an excellent choice.
 
-**My thought's and opinions** - I'm very in favor of individuals in Information Security holding a Networking Certification and I think the CCNA is the **best** networking certification you can take for the money. However, as a Bonus I'll include a couple of **free** certifications you can take later on in the post :)
+**My thought's and opinions** - I'm very in favor of individuals in Information Security holding a Networking Certification and I think the CCNA is the **best** networking certification you can take for the money.
 
+### Cyber Ops Associate (CCNA CyberOps)
+
+**Cost - $300**
+
+**Courseware** - No courseware was included with the Certification exam and or attempt, however, Cisco does offer Course Materials for sale through their <a href="https://www.ciscopress.com/store/cisco-cyberops-associate-cbrops-200-201-official-cert-9780136807834">Website</a>. Cisco always does a decent job with their 
+
+**Cyber Ops Associate** - The certification was incredibly fair, there was a relatively wide variety of attacks, analysis scenarios, and Frameworks covered on the exam. It's a great Analyst for a SOC certification. I have also taken CyberOps professional and can say it's not exactly as fair as CyberOps associate. I don't think it has much real world value as CyberOps Associate.
+
+**My thought's and opinions** - I'd highly recommend this certification to a SOC Analyst who's looking to add onto their career. 
 ## CompTIA
 
 ### Network+
@@ -155,6 +164,8 @@ To get each of the certifications for free, you'll need to register an account w
 ## Juniper
 
 ### JNCIA-Suite
+
+**UPDATE 6/5/2021**: This is no longer free.
 
 Juniper is offering all their Associate level certifications for free at the moment with the [Juniper Open Learning platform](https://learningportal.juniper.net/juniper/user_activity_info.aspx?id=11478). All the free certifications you can take are offered here:
 
