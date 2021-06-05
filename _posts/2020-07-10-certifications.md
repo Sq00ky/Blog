@@ -63,6 +63,7 @@ In terms of coverage of content on the exam, everything in the PDF should be con
 
 **My thoughts and opinions** - I think that the course/certification is a great introduction to Wireless Testing. I don't believe that the certification is overly challenging (as I finished my exam with 3 hours to spare...), but I do think that its a testimate to how comprehensive the course materials are. The course materials are a little out dated, but in Offensive Security's defense, wireless testing hasn't changed that much.
 
+
 ## CompTIA
 
 CompTIA is a vendor neutral, non-profit Certification body designed to help improve the broad knowledge of individuals looking to advance their career in Information Technology.
@@ -77,6 +78,21 @@ CompTIA is a vendor neutral, non-profit Certification body designed to help impr
 
 **My thought's and opinions** - This certification exam isn't valued yet. It doesn't hold weight in the DoD (yet), and that would be its saving grace. It's only been out for approximately 2 years with [CompTIA fighting to get it recognized](https://www.comptia.org/blog/why-comptia-pentest) for the DoD 8570.01-m. If it were to get accepted, [according to CompTIA](https://www.comptia.org/blog/what-is-dod-8570-certifications) it would satisfy requirements for CSSP Incident Responder and CSSP Auditor. If you're a student, I would highly recommend you pick up the educational voucher for $233.
 
+## Zero Point Security
+
+Zero Point Security is a company owned and operated by RastaMouse - The one and only. He had developed Rasta Labs and now a new Training course, CRTO.
+
+### Red Team Ops / CRTO (Certified Red Team Operator)
+
+**Cost - $500+**
+
+**Courseware** - Upon purchasing the CRTO course, you will recieve an invite to the Zero Point Security Canvas platform where all the course material is located. You get to keep access to this **for life**, and will recieve **all future updates for free**. Though, if you would like to purchase extra lab time, it will cost you a steep additional fee. Though, the lifetime access to the course material is worth it in itself. Both Covenant and Cobalt Strike are taught in the course, making it useful as a C2/AD Attack reference guide if nothing else.
+
+** RTO Exam** - This exam was an amazing experience, it covered just about all Active Directory attack techniques mentioned in the course. It's equally rigerous as the OSEP, the only difference is when it comes to AV Evasion, you're on your own :). It is highly advised you use a C2 in the exam environment otherwise you'll be knee deep in RDP sessions. You need to earn a total of 3 out of 4 flags to pass the exam, which is more than possible. I achieved 4/4 flags in under 10 or so hours. I didn't actually know you needed only 3/4 flags until i was knee deep in RDP sessions because I made the poor decision of using Metasploit as my C2 lol. Use CS or Covenant. It'll save you so much time. No report is required for this one.
+
+**My thought's and opinions** - The exam was great. Between this and OSEP, I couldn't ask for a better Red Team Training experience. There were (like I previously mentioned with OSEP) a few topics that were missing, but that's okay. The amount of value you get from these two courses is insane. 100% would recommend RTO.
+
+**NOTE**: You need to pass the RTO exam and the RTO course to obtain the CRTO Certification.
 
 ## eLearnSecurity
 
