@@ -17,9 +17,9 @@ A Common question I get asked is "What do you think of this certification?", "Sh
 
 ### What certifications have I taken?
 
-As of 7/10/2020, I've taken the following:
+As of 6/5/2021, I've taken the following:
 
-A+, Security+, CySA+, PenTest+, Network+, CCENT, CCNA R&S, OSCP, OSWP, and CEH.
+A+, Security+, CySA+, PenTest+, Network+, CCENT, CCNA R&S, CCNA CyberOps, OSCP, OSEP, CRTO, OSWP, GNFA, and CEH.
 
 For the sake of time, I'm going to remove CCENT and A+ for this list, since they don't hold a lot of value when looking for a job in an Information Security oriented role.
 
@@ -29,7 +29,21 @@ For the sake of time, I'm going to remove CCENT and A+ for this list, since they
 
 Offensive Security is well known for their certifications, and for a very good reason. They offer a very unique approach to learning with a methodology of "Try Harder". This basically means "Try to learn it on your own. People aren't always going to be there to hold your hand". This isn't always the case, but it does teaches you to build a very important work ethic that is required for you to succeed in InfoSec.
 
-### PWK/OSCP 
+### PEN-300/OSEP
+
+**Cost - $1,300 - $1,499**
+
+**PEN-300** - The PEN-300 course comes with a total of 18 sections ranging from Active Directory Attacks to Building your own custom Payload droppers, Shellcode injectors, and evading Enterprise AV. Included in the course, there's over 20 hours of video content and a 700+ page PDF that goes along with the videos. The PDF tends to go into a little bit more detail than the videos.  The course has an extremely heavy emphasis on evading Anti-Virus which is super useful in the real world. It's proved useful where several times I was able to evade my host AV. No other course has taught me to do this. This by far is one of the key value points of this course.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">did someone say Evade All The Things?<br><br>I even ran it on my host PC with no detections 🥲<br><br>never did I think I would see Meterpreter not get picked up on my machine w/ AV enabled <a href="https://t.co/IbHHjhPCzi">pic.twitter.com/IbHHjhPCzi</a></p>&mdash; Banana (@NekoS3c) <a href="https://twitter.com/NekoS3c/status/1397756594637713413?ref_src=twsrc%5Etfw">May 27, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+**OSEP** - Starting the Exam, you're presented with a small engagement note that outlines the objectives of the exam -- You have to achieve one of two goals, either get Secret.txt or gain 100 points. In my experience, there's no way to tell which path you're going down until you get there. I achieved getting Secret.txt, however, I was fairly close to 10 machines by the time I got Secret.txt. It took me approximately 8 hours to achieve the exam objective split up across 17 hours. I started my exam at 10:00pm EST on a Sunday night and slept at 2:00am EST. I had woke up at around 12:00PM EST the next day and wrapped up at around 3:45PM EST. I was able to submit the report a minute under the 24 hour mark, so as long as you don't get caught up for too long in any particular point, 48 hours should be more than enough.
+
+In terms of coverage of content on the exam, everything in the PDF should be considered fair game. The 6 challenges in the labs do adequately prepare you for the exam, I'd highly recommend writing practice reports on challenge 3-6, just so you're familiar with the format. I treated it very much like a real engagement with an Executive Overview, Testing Narrative, and individual step-by-step walkthrough on how to compromise and escalate privileges on each machine. This certification exam is by far (aside from OSWP) the most fair exam OffSec offers to date. It's so much more fair (by a longshot) compared to OSCP and has a huge amount of real world relevance.
+
+**My thoughts and opinions** - This is one of the best courses that I have taken in the past few years. There's only a few things I would have liked to see in this course. I really would have liked to see NTLM Relaying, Password Spraying, LLMNR Poisoning, Compromising VPN Portals, and other topics relating to compromising the identity.
+
+### PEN-200/PWK/OSCP 
 
 **Cost - $1000 - $1349**
 
