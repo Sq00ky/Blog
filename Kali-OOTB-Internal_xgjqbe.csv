@@ -1,0 +1,567 @@
+Plugin ID,CVE,CVSS v2.0 Base Score,Risk,Host,Protocol,Port,Name,Synopsis,Description,Solution,See Also,Plugin Output,STIG Severity,CVSS v3.0 Base Score,CVSS v2.0 Temporal Score,CVSS v3.0 Temporal Score,Risk Factor,BID,XREF,MSKB,Plugin Publication Date,Plugin Modification Date,Metasploit,Core Impact,CANVAS
+"10114","CVE-1999-0524","0.0","None","10.10.10.234","icmp","0","ICMP Timestamp Request Remote Date Disclosure","It is possible to determine the exact time set on the remote host.","The remote host answers to an ICMP timestamp request.  This allows an
+attacker to know the date that is set on the targeted machine, which
+may assist an unauthenticated, remote attacker in defeating time-based
+authentication protocols.
+
+Timestamps returned from machines running Windows Vista / 7 / 2008 /
+2008 R2 are deliberately incorrect, but usually within 1000 seconds of
+the actual system time.","Filter out the ICMP timestamp requests (13), and the outgoing ICMP
+timestamp replies (14).","","The difference between the local and remote clocks is -20 seconds.
+","","0.0","","","None","","CWE:200","","1999/08/01","2019/10/04","","",""
+"10267","","","None","10.10.10.234","tcp","22","SSH Server Type and Version Information","An SSH server is listening on this port.","It is possible to obtain information about the remote SSH server by
+sending an empty authentication request.","n/a","","
+SSH version : SSH-2.0-OpenSSH_8.4p1 Debian-5
+SSH supported authentication : publickey,password
+","","","","","None","","IAVT:0001-T-0933","","1999/10/12","2020/09/22","","",""
+"10287","","","None","10.10.10.234","udp","0","Traceroute Information","It was possible to obtain traceroute information.","Makes a traceroute to the remote host.","n/a","","For your information, here is the traceroute from 10.10.10.100 to 10.10.10.234 : 
+10.10.10.100
+10.10.10.234
+
+Hop Count: 1
+","","","","","None","","","","1999/11/27","2020/08/20","","",""
+"10881","","","None","10.10.10.234","tcp","22","SSH Protocol Versions Supported","A SSH server is running on the remote host.","This plugin determines the versions of the SSH protocol supported by
+the remote SSH daemon.","n/a","","The remote SSH daemon supports the following versions of the
+SSH protocol :
+
+  - 1.99
+  - 2.0
+","","","","","None","","","","2002/03/06","2021/01/19","","",""
+"11936","","","None","10.10.10.234","tcp","0","OS Identification","It is possible to guess the remote operating system.","Using a combination of remote probes (e.g., TCP/IP, SMB, HTTP, NTP,
+SNMP, etc.), it is possible to guess the name of the remote operating
+system in use. It is also possible sometimes to guess the version of
+the operating system.","n/a","","
+Remote operating system : Linux Kernel 5.10.0-kali8-amd64
+Confidence level : 99
+Method : uname
+
+ 
+The remote host is running Linux Kernel 5.10.0-kali8-amd64","","","","","None","","","","2003/12/09","2021/05/12","","",""
+"12634","","","None","10.10.10.234","tcp","0","Authenticated Check : OS Name and Installed Package Enumeration","This plugin gathers information about the remote host via an
+authenticated session.","This plugin logs into the remote host using SSH, RSH, RLOGIN, Telnet,
+or local commands and extracts the list of installed packages.
+
+If using SSH, the scan should be configured with a valid SSH public
+key and possibly an SSH passphrase (if the SSH public key is protected
+by a passphrase).","n/a","","It was possible to log into the remote host using the supplied
+password.
+
+Note, though, that an attempt to elevate privileges using 'sudo' failed
+for an unknown reason. Further commands will be run as the user
+specified in the scan policy.
+
+The output of ""uname -a"" is :
+Linux kali 5.10.0-kali8-amd64 #1 SMP Debian 5.10.40-1kali1 (2021-05-31) x86_64 GNU/Linux
+
+Local security checks have NOT been enabled because the remote Linux
+distribution is not supported.","","","","","None","","","","2004/07/06","2021/06/24","","",""
+"14272","","","None","10.10.10.234","tcp","22","Netstat Portscanner (SSH)","Remote open ports can be enumerated via SSH.","Nessus was able to run 'netstat' on the remote host to enumerate the
+open ports.
+
+See the section 'plugins options' about configuring this plugin.
+
+Note: This plugin will run on Windows (using netstat.exe) in the 
+event that the target being scanned is localhost.","n/a","https://en.wikipedia.org/wiki/Netstat","Port 22/tcp was found to be open","","","","","None","","","","2004/08/15","2020/06/12","","",""
+"14788","","","None","10.10.10.234","tcp","0","IP Protocols Scan","This plugin detects the protocols understood by the remote IP stack.","This plugin detects the protocols understood by the remote IP stack.","n/a","http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml","The following IP protocols are accepted on this host:
+1	ICMP
+2	IGMP
+6	TCP
+17	UDP
+103	PIM
+136	UDPLite
+","","","","","None","","","","2004/09/22","2019/03/06","","",""
+"19506","","","None","10.10.10.234","tcp","0","Nessus Scan Information","This plugin displays information about the Nessus scan.","This plugin displays, for each tested host, information about the
+scan itself :
+
+  - The version of the plugin set.
+  - The type of scanner (Nessus or Nessus Home).
+  - The version of the Nessus Engine.
+  - The port scanner(s) used.
+  - The port range scanned.
+  - The ping round trip time 
+  - Whether credentialed or third-party patch management
+    checks are possible.
+  - Whether the display of superseded patches is enabled
+  - The date of the scan.
+  - The duration of the scan.
+  - The number of hosts scanned in parallel.
+  - The number of checks done in parallel.","n/a","","Information about this scan : 
+
+Nessus version : 8.15.0
+Nessus build : 20271
+Plugin feed version : 202106260143
+Scanner edition used : Nessus Home
+Scanner OS : WINDOWS
+Scanner distribution : win-x86-64
+Scan type : Normal
+Scan name : Kali-OOTB-Internal
+Scan policy used : Advanced Scan
+Scanner IP : 10.10.10.100
+Port scanner(s) : netstat 
+Port range : all
+Ping RTT : Unavailable
+Thorough tests : yes
+Experimental tests : no
+Paranoia level : 2
+Report verbosity : 2
+Safe checks : yes
+Optimize the test : yes
+Credentialed checks : no
+Patch management checks : None
+Display superseded patches : yes (supersedence plugin launched)
+CGI scanning : disabled
+Web application tests : disabled
+Max hosts : 5
+Max checks : 5
+Recv timeout : 5
+Backports : None
+Allow post-scan editing: Yes
+Scan Start Date : 2021/6/26 17:23 Eastern Standard Time
+Scan duration : 1028 sec
+","","","","","None","","","","2005/08/26","2021/06/17","","",""
+"20094","","","None","10.10.10.234","tcp","0","VMware Virtual Machine Detection","The remote host is a VMware virtual machine.","According to the MAC address of its network adapter, the remote host
+is a VMware virtual machine.","Since it is physically accessible through the network, ensure that its
+configuration matches your organization's security policy.","","
+The remote host is a VMware virtual machine.
+","","","","","None","","","","2005/10/27","2019/12/11","","",""
+"22964","","","None","10.10.10.234","tcp","22","Service Detection","The remote service could be identified.","Nessus was able to identify the remote service by its banner or by
+looking at the error message it sends when it receives an HTTP
+request.","n/a","","An SSH server is running on this port.","","","","","None","","","","2007/08/19","2021/04/14","","",""
+"25202","","","None","10.10.10.234","tcp","0","Enumerate IPv6 Interfaces via SSH","Nessus was able to enumerate the IPv6 interfaces on the remote host.","Nessus was able to enumerate the network interfaces configured with
+IPv6 addresses by connecting to the remote host via SSH using the
+supplied credentials.","Disable IPv6 if you are not actually using it. Otherwise, disable any
+unused IPv6 interfaces.","","
+The following IPv6 interfaces are set on the remote host :
+
+ - fe80::20c:29ff:fe7e:b19e (on interface eth0)
+ - ::1 (on interface lo)
+","","","","","None","","","","2007/05/11","2017/01/26","","",""
+"25203","","","None","10.10.10.234","tcp","0","Enumerate IPv4 Interfaces via SSH","Nessus was able to enumerate the IPv4 interfaces on the remote host.","Nessus was able to enumerate the network interfaces configured with
+IPv4 addresses by connecting to the remote host via SSH using the
+supplied credentials.","Disable any unused IPv4 interfaces.","","
+The following IPv4 addresses are set on the remote host :
+
+ - 10.10.10.234 (on interface eth0)
+ - 127.0.0.1 (on interface lo)
+","","","","","None","","","","2007/05/11","2017/01/26","","",""
+"25220","","","None","10.10.10.234","tcp","0","TCP/IP Timestamps Supported","The remote service implements TCP timestamps.","The remote host implements TCP timestamps, as defined by RFC1323.  A
+side effect of this feature is that the uptime of the remote host can
+sometimes be computed.","n/a","http://www.ietf.org/rfc/rfc1323.txt","","","","","","None","","","","2007/05/16","2019/03/06","","",""
+"25221","","","None","10.10.10.234","tcp","22","Remote listeners enumeration (Linux / AIX)","Using the supplied credentials, it was possible to identify the
+process listening on the remote port.","By logging into the remote host with the supplied credentials, Nessus
+was able to obtain the name of the process listening on the remote
+port.
+
+Note that the method used by this plugin only works for hosts running
+Linux or AIX.","n/a","","
+  Process ID   : 159969
+  Executable   : /usr/sbin/sshd
+  Command line : sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+","","","","","None","","","","2007/05/16","2021/06/04","","",""
+"33276","","","None","10.10.10.234","tcp","0","Enumerate MAC Addresses via SSH","Nessus was able to enumerate MAC addresses on the remote host.","Nessus was able to enumerate MAC addresses by connecting to the remote
+host via SSH with the supplied credentials.","Disable any unused interfaces.","","
+The following MAC address exists on the remote host :
+
+  - 00:0c:29:7e:b1:9e (interface eth0)
+","","","","","None","","","","2008/06/30","2018/08/13","","",""
+"34098","","","None","10.10.10.234","tcp","0","BIOS Info (SSH)","BIOS info could be read.","Using SMBIOS and UEFI, it was possible to get BIOS info.","N/A","","Version      : 6.00
+Vendor       : Phoenix Technologies LTD
+Release Date : 07/22/2020
+UUID         : e64b4d56-bca9-f75d-4aac-b100827eb19e
+Secure boot  : disabled
+","","","","","None","","","","2008/09/08","2020/09/22","","",""
+"35351","","","None","10.10.10.234","tcp","0","System Information Enumeration (via DMI)","Information about the remote system's hardware can be read.","Using the SMBIOS (aka DMI) interface, it was possible to retrieve
+information about the remote system's hardware, such as its product
+name and serial number.","n/a","","Chassis Information
+  Serial Number : None
+  Version       : N/A
+  Manufacturer  : No Enclosure
+  Lock          : Not Present
+  Type          : Other
+
+System Information
+  Serial Number : VMware-56 4d 4b e6 a9 bc 5d f7-4a ac b1 00 82 7e b1 9e
+  Version       : None
+  Manufacturer  : VMware, Inc.
+  Product Name  : VMware Virtual Platform
+  Family        : Not Specified
+
+","","","","","None","","","","2009/01/12","2016/08/17","","",""
+"35716","","","None","10.10.10.234","tcp","0","Ethernet Card Manufacturer Detection","The manufacturer can be identified from the Ethernet OUI.","Each ethernet MAC address starts with a 24-bit Organizationally 
+Unique Identifier (OUI). These OUIs are registered by IEEE.","n/a","https://standards.ieee.org/faqs/regauth.html
+http://www.nessus.org/u?794673b4","
+The following card manufacturers were identified :
+
+00:0C:29:7E:B1:9E : VMware, Inc.
+","","","","","None","","","","2009/02/19","2020/05/13","","",""
+"45432","","","None","10.10.10.234","tcp","0","Processor Information (via DMI)","Nessus was able to read information about the remote system's
+processor.","Nessus was able to retrieve information about the remote system's
+hardware, such as its processor type, by using the SMBIOS (aka DMI)
+interface.","n/a","","
+Nessus detected 4 processors :
+
+Current Speed   : 3700 MHz
+Version         : Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+Manufacturer    : GenuineIntel
+External Clock  : Unknown
+Status          : Populated, Enabled
+Family          : Unknown
+Type            : Central Processor
+
+Current Speed   : 3700 MHz
+Version         : Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+Manufacturer    : GenuineIntel
+External Clock  : Unknown
+Status          : Populated, Enabled
+Family          : Unknown
+Type            : Central Processor
+
+Current Speed   : 3700 MHz
+Version         : Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+Manufacturer    : GenuineIntel
+External Clock  : Unknown
+Status          : Populated, Enabled
+Family          : Unknown
+Type            : Central Processor
+
+Current Speed   : 3700 MHz
+Version         : Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz
+Manufacturer    : GenuineIntel
+External Clock  : Unknown
+Status          : Populated, Enabled
+Family          : Unknown
+Type            : Central Processor
+","","","","","None","","","","2010/04/06","2016/02/25","","",""
+"45433","","","None","10.10.10.234","tcp","0","Memory Information (via DMI)","Information about the remote system's memory devices can be read.","Using the SMBIOS (aka DMI) interface, it was possible to retrieve
+information about the remote system's memory devices, such as the
+total amount of installed memory.","n/a","","
+Total memory : 16384 MB","","","","","None","","","","2010/04/06","2018/03/29","","",""
+"45590","","","None","10.10.10.234","tcp","0","Common Platform Enumeration (CPE)","It was possible to enumerate CPE names that matched on the remote
+system.","By using information obtained from a Nessus scan, this plugin reports
+CPE (Common Platform Enumeration) matches for various hardware and
+software products found on a host. 
+
+Note that if an official CPE is not available for the product, this
+plugin computes the best possible CPE based on the information
+available from the scan.","n/a","http://cpe.mitre.org/
+https://nvd.nist.gov/products/cpe","
+The remote operating system matched the following CPE : 
+
+  cpe:/o:linux:linux_kernel:5.10
+
+Following application CPE matched on the remote system :
+
+  cpe:/a:openbsd:openssh:8.4
+","","","","","None","","","","2010/04/21","2021/06/03","","",""
+"54615","","","None","10.10.10.234","tcp","0","Device Type","It is possible to guess the remote device type.","Based on the remote operating system, it is possible to determine
+what the remote system type is (eg: a printer, router, general-purpose
+computer, etc).","n/a","","Remote device type : general-purpose
+Confidence level : 99
+","","","","","None","","","","2011/05/23","2011/05/23","","",""
+"55472","","","None","10.10.10.234","tcp","0","Device Hostname","It was possible to determine the remote system hostname.","This plugin reports a device's hostname collected via SSH or WMI.","n/a","","
+  Hostname : kali
+    kali (hostname command)","","","","","None","","","","2011/06/30","2021/06/09","","",""
+"56468","","","None","10.10.10.234","tcp","0","Time of Last System Startup","The system has been started.","Using the supplied credentials, Nessus was able to determine when the
+host was last started.","n/a","","
+  reboot   system boot  5.10.0-kali8-amd Sat Jun 26 15:30   still running
+  
+  wtmp begins Sat Jun 26 15:30:19 2021
+","","","","","None","","","","2011/10/12","2018/06/19","","",""
+"58651","","","None","10.10.10.234","tcp","0","Netstat Active Connections","Active connections are enumerated via the 'netstat' command.","This plugin runs 'netstat' on the remote machine to enumerate all
+active 'ESTABLISHED' or 'LISTENING' tcp/udp connections.
+
+Note: The output for this plugin can be very long, and is not shown by default. To display it, enable verbose reporting in scan settings.","n/a","","
+Netstat output :
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0    192 10.10.10.234:22         10.10.10.100:51116      ESTABLISHED
+tcp6       0      0 :::22                   :::*                    LISTEN     
+udp        0      0 10.10.10.234:68         10.10.10.1:67           ESTABLISHED
+raw6       0      0 :::58                   :::*                    7          
+","","","","","None","","","","2012/04/10","2020/09/11","","",""
+"64582","","","None","10.10.10.234","tcp","0","Netstat Connection Information","Nessus was able to parse the results of the 'netstat' command on the
+remote host.","The remote host has listening ports or established connections that
+Nessus was able to extract from the results of the 'netstat' command.
+
+Note: The output for this plugin can be very long, and is not shown by default. To display it, enable verbose reporting in scan settings.","n/a","","tcp4 (listen)
+  src: [host=0.0.0.0, port=22]
+  dst: [host=0.0.0.0, port=*]
+
+tcp4 (established)
+  src: [host=10.10.10.234, port=22]
+  dst: [host=10.10.10.100, port=51116]
+
+tcp6 (listen)
+  src: [host=::, port=22]
+  dst: [host=::, port=*]
+
+udp4 (established)
+  src: [host=10.10.10.234, port=68]
+  dst: [host=10.10.10.1, port=67]
+
+udp6 (listen)
+  src: [host=::, port=58]
+  dst: [host=::, port=*]
+
+","","","","","None","","","","2013/02/13","2020/09/09","","",""
+"66334","","","None","10.10.10.234","tcp","0","Patch Report","The remote host is missing several patches.","The remote host is missing one or more security patches. This plugin
+lists the newest version of each patch to install to make sure the
+remote host is up-to-date.","Install the patches listed below.","","
+
+. You need to take the following action :
+
+[ OpenSSH < 8.5 (147662) ]
+
++ Action to take : Upgrade to OpenSSH version 8.5 or later.
+
+
+","","","","","None","","","","2013/07/08","2021/06/09","","",""
+"70657","","","None","10.10.10.234","tcp","22","SSH Algorithms and Languages Supported","An SSH server is listening on this port.","This script detects which algorithms and languages are supported by
+the remote service for encrypting communications.","n/a","","
+Nessus negotiated the following encryption algorithm with the server : 
+
+The server supports the following options for kex_algorithms : 
+
+  curve25519-sha256
+  curve25519-sha256@libssh.org
+  diffie-hellman-group-exchange-sha256
+  diffie-hellman-group14-sha256
+  diffie-hellman-group16-sha512
+  diffie-hellman-group18-sha512
+  ecdh-sha2-nistp256
+  ecdh-sha2-nistp384
+  ecdh-sha2-nistp521
+
+The server supports the following options for server_host_key_algorithms : 
+
+  ecdsa-sha2-nistp256
+  rsa-sha2-256
+  rsa-sha2-512
+  ssh-ed25519
+  ssh-rsa
+
+The server supports the following options for encryption_algorithms_client_to_server : 
+
+  aes128-ctr
+  aes128-gcm@openssh.com
+  aes192-ctr
+  aes256-ctr
+  aes256-gcm@openssh.com
+  chacha20-poly1305@openssh.com
+
+The server supports the following options for encryption_algorithms_server_to_client : 
+
+  aes128-ctr
+  aes128-gcm@openssh.com
+  aes192-ctr
+  aes256-ctr
+  aes256-gcm@openssh.com
+  chacha20-poly1305@openssh.com
+
+The server supports the following options for mac_algorithms_client_to_server : 
+
+  hmac-sha1
+  hmac-sha1-etm@openssh.com
+  hmac-sha2-256
+  hmac-sha2-256-etm@openssh.com
+  hmac-sha2-512
+  hmac-sha2-512-etm@openssh.com
+  umac-128-etm@openssh.com
+  umac-128@openssh.com
+  umac-64-etm@openssh.com
+  umac-64@openssh.com
+
+The server supports the following options for mac_algorithms_server_to_client : 
+
+  hmac-sha1
+  hmac-sha1-etm@openssh.com
+  hmac-sha2-256
+  hmac-sha2-256-etm@openssh.com
+  hmac-sha2-512
+  hmac-sha2-512-etm@openssh.com
+  umac-128-etm@openssh.com
+  umac-128@openssh.com
+  umac-64-etm@openssh.com
+  umac-64@openssh.com
+
+The server supports the following options for compression_algorithms_client_to_server : 
+
+  none
+  zlib@openssh.com
+
+The server supports the following options for compression_algorithms_server_to_client : 
+
+  none
+  zlib@openssh.com
+","","","","","None","","","","2013/10/28","2017/08/28","","",""
+"86420","","","None","10.10.10.234","tcp","0","Ethernet MAC Addresses","This plugin gathers MAC addresses from various sources and
+consolidates them into a list.","This plugin gathers MAC addresses discovered from both remote probing
+of the host (e.g. SNMP and Netbios) and from running local checks
+(e.g. ifconfig). It then consolidates the MAC addresses into a single,
+unique, and uniform list.","n/a","","The following is a consolidated list of detected MAC addresses:
+  - 00:0C:29:7E:B1:9E
+","","","","","None","","","","2015/10/16","2020/05/13","","",""
+"97993","","","None","10.10.10.234","tcp","0","OS Identification and Installed Software Enumeration over SSH v2 (Using New SSH Library)","Information about the remote host can be disclosed via an
+authenticated session.","Nessus was able to login to the remote host using SSH or local
+commands and extract the list of installed packages.","n/a","","
+It was possible to log into the remote host via SSH using 'password' authentication.
+
+The output of ""uname -a"" is :
+Linux kali 5.10.0-kali8-amd64 #1 SMP Debian 5.10.40-1kali1 (2021-05-31) x86_64 GNU/Linux
+
+We are able to run commands on the remote host, but are unable to
+currently identify it in this plugin.
+
+Runtime : 509.333517 seconds
+","","","","","None","","","","2017/05/30","2020/06/12","","",""
+"110095","","","None","10.10.10.234","tcp","22","Target Credential Issues by Authentication Protocol - No Issues Found","Nessus was able to log in to the remote host using the provided
+credentials. No issues were reported with access, privilege, or
+intermittent failure.","Valid credentials were provided for an authentication protocol on the
+remote target and Nessus did not log any subsequent errors or failures
+for the authentication protocol.
+
+When possible, Nessus tracks errors or failures related to otherwise
+valid credentials in order to highlight issues that may result in
+incomplete scan results or limited scan coverage. The types of issues
+that are tracked include errors that indicate that the account used
+for scanning did not have sufficient permissions for a particular
+check, intermittent protocol failures which are unexpected after the
+protocol has been negotiated successfully earlier in the scan, and
+intermittent authentication failures which are unexpected after a
+credential set has been accepted as valid earlier in the scan. This
+plugin reports when none of the above issues have been logged during
+the course of the scan for at least one authenticated protocol. See
+plugin output for details, including protocol, port, and account.
+
+Please note the following :
+
+- This plugin reports per protocol, so it is possible for
+  issues to be encountered for one protocol and not another.
+  For example, authentication to the SSH service on the
+  remote target may have consistently succeeded with no
+  privilege errors encountered, while connections to the SMB
+  service on the remote target may have failed
+  intermittently.
+
+- Resolving logged issues for all available authentication
+  protocols may improve scan coverage, but the value of
+  resolving each issue for a particular protocol may vary
+  from target to target depending upon what data (if any) is
+  gathered from the target via that protocol and what
+  particular check failed. For example, consistently
+  successful checks via SSH are more critical for Linux
+  targets than for Windows targets, and likewise
+  consistently successful checks via SMB are more critical
+  for Windows targets than for Linux targets.","n/a","","
+Nessus was able to log in to the remote host via the following
+protocol as kali with no privilege or access problems reported :
+
+  Protocol        : SSH
+  Port            : 22","","","","","None","","IAVB:0001-B-0520","","2018/05/24","2021/04/12","","",""
+"110695","","","None","10.10.10.234","tcp","0","Authentication Success - Local Checks Not Available","The local security checks are unavailable.","Local security checks are not available for this host because they
+may be infeasible or may not be supported by Nessus. The credentials
+supplied in the scan policy may have been successful, but local
+security checks cannot be performed at this time.","If local security checks are required for this host, contact Tenable
+support.","","A successful connection to the remote host was established, but local
+security checks are not available.
+
+Plugin      : ssh_get_info.nasl
+Plugin ID   : 12634
+Plugin Name : Authenticated Check : OS Name and Installed Package Enumeration
+Report      :
+====================
+It was possible to log into the remote host using the supplied
+password.
+
+Note, though, that an attempt to elevate privileges using 'sudo' failed
+for an unknown reason. Further commands will be run as the user
+specified in the scan policy.
+
+The output of ""uname -a"" is :
+Linux kali 5.10.0-kali8-amd64 #1 SMP Debian 5.10.40-1kali1 (2021-05-31) x86_64 GNU/Linux
+
+Local security checks have NOT been enabled because the remote Linux
+distribution is not supported.
+====================
+","","","","","None","","IAVB:0001-B-0521","","2018/06/26","2020/09/22","","",""
+"117886","","","None","10.10.10.234","tcp","0","Local Checks Not Enabled (info)","Local checks were not enabled.","Nessus did not enable local checks on the remote host. This does not
+necessarily indicate a problem with the scan. Credentials may not have
+been provided, local checks may not be available for the target, the
+target may not have been identified, or another issue may have
+occurred that prevented local checks from being enabled. See plugin
+output for details.
+
+This plugin reports informational findings related to local checks not
+being enabled. For failure information, see plugin 21745 :
+'Authentication Failure - Local Checks Not Run'.","n/a","","
+The following issues were reported :
+
+  - Plugin      : ssh_get_info2.nasl
+    Plugin ID   : 97993
+    Plugin Name : OS Identification and Installed Software Enumeration over SSH v2 (Using New SSH Library)
+    Protocol    : SSH
+    Message     : Debian version does not match known patterns
+
+  - Plugin      : hostlevel_checks_unavailable.nasl
+    Plugin ID   : 110695
+    Plugin Name : Authentication Success - Local Checks Not Available
+    Message     : Local security checks are unavailable.
+","","","","","None","","IAVB:0001-B-0515","","2018/10/02","2020/09/22","","",""
+"132634","","","None","10.10.10.234","tcp","0","Deprecated SSLv2 Connection Attempts","Secure Connections, using a deprecated protocol were attempted as part of the scan","This plugin enumerates and reports any SSLv2 connections which 
+  were attempted as part of a scan. This protocol has been deemed prohibited since 2011 because of security 
+  vulnerabilities and most major ssl libraries such as openssl, nss, mbed and wolfssl do not provide this functionality
+  in their latest versions. This protocol has been deprecated in Nessus 8.9 and later.","N/A","","
+Nessus attempted the following SSLv2 connection(s) as part of this scan: 
+
+Plugin ID: 42476
+Timestamp: 2021-06-26 21:26:43
+Port: 22
+
+","","","","","None","","","","2020/01/06","2020/01/06","","",""
+"141118","","","None","10.10.10.234","tcp","22","Target Credential Status by Authentication Protocol - Valid Credentials Provided","Valid credentials were provided for an available authentication protocol.","Nessus was able to determine that valid credentials were provided for
+an authentication protocol available on the remote target because it
+was able to successfully authenticate directly to the remote target
+using that authentication protocol at least once. Authentication was
+successful because the authentication protocol service was available
+remotely, the service was able to be identified, the authentication
+protocol was able to be negotiated successfully, and a set of
+credentials provided in the scan policy for that authentication
+protocol was accepted by the remote service. See plugin output for
+details, including protocol, port, and account.
+
+Please note the following :
+
+- This plugin reports per protocol, so it is possible for
+  valid credentials to be provided for one protocol and not
+  another. For example, authentication may succeed via SSH
+  but fail via SMB, while no credentials were provided for
+  an available SNMP service.
+
+- Providing valid credentials for all available
+  authentication protocols may improve scan coverage, but
+  the value of successful authentication for a given
+  protocol may vary from target to target depending upon
+  what data (if any) is gathered from the target via that
+  protocol. For example, successful authentication via SSH
+  is more valuable for Linux targets than for Windows
+  targets, and likewise successful authentication via SMB
+  is more valuable for Windows targets than for Linux
+  targets.","n/a","","
+Nessus was able to log in to the remote host via the following
+protocol as kali :
+
+  Protocol        : SSH
+  Port            : 22","","","","","None","","","","2020/10/15","2020/10/15","","",""
+"147662","CVE-2021-28041","4.6","High","10.10.10.234","tcp","22","OpenSSH < 8.5","The SSH server running on the remote host is affected by a double-free error.","ssh-agent in OpenSSH before 8.5 has a double free that may be relevant in a few less-common scenarios, such as
+unconstrained agent-socket access on a legacy operating system, or the forwarding of an agent to an attacker-controlled
+host.
+
+Note that Nessus has not tested for these issues but has instead relied only on the application's self-reported
+version number.","Upgrade to OpenSSH version 8.5 or later.","https://www.openwall.com/lists/oss-security/2021/03/03/1
+https://www.openssh.com/txt/release-8.5","
+  Version source    : SSH-2.0-OpenSSH_8.4p1 Debian-5
+  Installed version : 8.4p1
+  Fixed version     : 8.5
+","I","7.1","3.4","6.2","Medium","","IAVA:2021-A-0121","","2021/03/11","2021/05/03","","",""
+"149334","","","None","10.10.10.234","tcp","22","SSH Password Authentication Accepted","The SSH server on the remote host accepts password authentication.","The SSH server on the remote host accepts password authentication.","n/a","https://tools.ietf.org/html/rfc4252#section-8","","","","","","None","","","","2021/05/07","2021/05/07","","",""
