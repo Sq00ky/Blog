@@ -15,4 +15,4 @@ published: true
 date: '2021-06-01'
 ---
 
-Soft release coming soon...
+Week of 6/28
