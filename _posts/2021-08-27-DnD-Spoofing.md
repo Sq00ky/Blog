@@ -124,3 +124,4 @@ Now we're going to perform our average Constrained Delegation S4U attack with Ru
  
  This is slightly different from our expectations (of there being a session on wks02, seeing that the constrained delegation attack was targeted at wks02), but we can deal with it! Alls we need to do to correct this is flipflop WKS01 and WKS02 in Active Directory to make it appear the opposite way.
  
+Like I said earlier, this is a bit of a different style of blog post. Let me know what you think! Do you want to see more? Let me know on Twitter!
