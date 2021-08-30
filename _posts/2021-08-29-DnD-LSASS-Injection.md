@@ -73,7 +73,7 @@ The one thing I might note is that dumping credentials with LSASSy might work du
 
 So as soon as I saw this project (HoneyCred), I immediately became fascinated with this project. I knew that I wanted to build something like that, so I did! I fired up Visual Studio and was off to the races. The (CreateProcessWithLogonW)[https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createprocesswithlogonw] wiki page is super detailed and is super helpful when referencing the Windows API. Right at the top of the page, we have all the arguments we need to supply to use the API (See code block below). All of the arguments fortunately have a detailed description that outlines what each thing is (if it's not self explanatory) which is super nice.
 
-```C++
+```c++
 BOOL CreateProcessWithLogonW(
   LPCWSTR               lpUsername,
   LPCWSTR               lpDomain,
@@ -100,7 +100,7 @@ LPCWSTR | lpPassword
 
 All three of these are LPCWSTR, which are essentially just fancy strings. We can declare these with the following:
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -129,7 +129,7 @@ This seems incredibly daunting at first -- what in the hell is a DWORD64? It's s
 
 The Microsoft wiki states that LOGON_WITH_PROFILE actually validates credentials over the network, however (oddly enough), LOGON_NETCREDENTIALS_ONLY does **not**. This will be a prime candidate for us to use. Let's update the code:
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -154,7 +154,7 @@ LPCWSTR | lpApplicationName
 
 Let's update the code!
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -181,7 +181,7 @@ LPWSTR | lpCommandLine
 
 We're going to assign this a NULL value which is a valid argument according to the Microsoft wiki. Let's update the code again:
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -207,7 +207,7 @@ DWORD64 | dwCreationFlags
 
 Most of these flags seem as if they're for specialized purposes like Debugging, both 0x01000000 and 0x04000000 seem like the normal flags for creating a process. 0x04000000 seems (to me) like the most normal setting for a process, so this is what we're going to run with! Let's add it to the code:
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -233,7 +233,7 @@ LPVOID | dwCreationFlags
 
 Let's add it to the code:
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -259,7 +259,7 @@ LPCWSTR | lpCurrentDirectory
 
 Let's add it to the code:
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
@@ -289,7 +289,7 @@ This one is a bit bigger, we need to create a struct that contains the startupin
 
 You know? that wasn't actually that hard to explain. The code behind it is actually really simple.
 
-```C++
+```c++
 #include <iostream>
 #include <windows.h>
 #include <processthreadsapi.h>
