@@ -367,12 +367,12 @@ And details of the Special Logon event:
  
  ![[Pasted image 20210829205543.png]](https://blog.spookysec.net/img/Pasted image 20210829205543.png)
 
- And details of the logoff event:
+And details of the logoff event:
  
  ![[Pasted image 20210829204745.png]](https://blog.spookysec.net/img/Pasted image 20210829204745.png)
  
- In total, 3 events were generated, a 4624, 4672, and 4634.
-+ 
+In total, 3 events were generated, a 4624, 4672, and 4634.
+
 It seems like we've reached a natural conclusion in this article. I wish that it would be possible to retrieve the injected credentials in LSASS -- but that seems as though it's a limitation with the CreateProcessWithLogonW API endpoint, or potentially the LOGON_NETCREDENTIALSONLY flag.
 
 If you liked this post, let me know! Your feedback is greatly appriciated!
