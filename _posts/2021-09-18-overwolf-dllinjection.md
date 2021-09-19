@@ -28,7 +28,7 @@ date: '2021-09-18'
 
 ---
 
-Hello guys gals and non binary pals, today we're going to be looking at a program called OverWolf. Overwolf is a piece of software backed by Curse Forge, Intel, Logitech, Twitch, Ubisoft and a bunch of other companies that is designed to add extensions (or Mods) onto games. Some examples might include an overlay that shows your health or ammo count in a different style. But yeah -- you get the gist of it. It's a pretty interesting piece of software to analyze.
+Hello guys, gals, and non binary pals, today we're going to be looking at a program called OverWolf. Overwolf is a piece of software backed by Curse Forge, Intel, Logitech, Twitch, Ubisoft and a bunch of other companies that is designed to add extensions (or Mods) onto games. Some examples might include an overlay that shows your health or ammo count in a different style. But yeah -- you get the gist of it. It's a pretty interesting piece of software to analyze.
 
 We're going to be using a pretty standard setup of [ProcMon](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon) from SysInternals and [ProcessHacker](https://processhacker.sourceforge.io/downloads.php).
 
