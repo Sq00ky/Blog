@@ -237,9 +237,13 @@ echo $dedupe dedupe domains with dmarc Records
 Now remember, just because DMARC records *are configured,* it doesn't mean they're configured properly. Let's do a check now and see how many have strict drop spoofed emails policy.
 
 **Drop Failed SPF check:** 110
+
 **Quarantine Failed SPF check:** 34
+
 **Pass Failed SPF check:** [128](https://raw.githubusercontent.com/Sq00ky/SpookySec-Blog/master/pass-failed-spf.txt)
+
 **Email Forensic Reports:** 264 
+
 
 **Note:** These numbers may be inaccurate to a degree. In further analysis some DMARC records have a sp record for Subdomains. I manually verified the Pass Failed SPF check, however. Just not Drop/Quarantinem so therefore, I am only linking the results to the domains that pass a failed SPF check.
 
