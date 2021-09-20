@@ -174,12 +174,12 @@ _dmarc.hulu.com.        300     IN      TXT     "v=DMARC1; p=quarantine; adkim=r
 
 None of these are very pretty, as I'm sure you can tell, so let's move onto the next method -- Using MXToolbox! MXToolbox parses records into an easy to read table for your viewing pleasure!
 
-**SPF: [https://mxtoolbox.com/spf.aspx](https://mxtoolbox.com/spf.aspx)
+**SPF:** [https://mxtoolbox.com/spf.aspx](https://mxtoolbox.com/spf.aspx)
 
 **Example Query:**
 ![[https://blog.spookysec.net/img/Pasted image 20210919194423.png]](https://blog.spookysec.net/img/Pasted image 20210919194423.png)
 
-**DMARC: [https://mxtoolbox.com/DMARC.aspx](https://mxtoolbox.com/DMARC.aspx)
+**DMARC:** [https://mxtoolbox.com/DMARC.aspx](https://mxtoolbox.com/DMARC.aspx)
 
 **Example Query:**
 ![[https://blog.spookysec.net/img/Pasted image 20210919194438.png]](https://blog.spookysec.net/img/Pasted image 20210919194438.png)
