@@ -2,7 +2,7 @@
 
 layout: post
 
-title: Email Spoofing 101 - A Full Guide
+title: Email Spoofing - A Full Guide
 
 gh-badge:
 
