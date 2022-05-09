@@ -132,7 +132,7 @@ It's important to note that this session lasts approximately 15 minutes. The ser
 ![[Pasted image 20220508190149.png]](https://blog.spookysec.net/img/Pasted image 20220508190149.png)
 
 **Verifying with Bloodhound**
-Verfiying that our session has successfully been created with Bloodhound is *almost* as easy as Net Sessions - First I'd like to cover *how* Bloodhound does session enumeration (I personally think this is important). [Walter Legowski](https://twitter.com/SadProcessor/) has put together an excellent diagram of how Sharphound does each component of enumeration on the system. 
+Verfiying that our session has successfully been created with Bloodhound is *almost* as easy as Net Sessions - First I'd like to cover *how* Bloodhound does session enumeration (I personally think this is important). [@SadProcessor](https://twitter.com/SadProcessor/) has put together an excellent diagram of how Sharphound does each component of enumeration on the system. 
 
 ![[Pasted image 20220508190622.png]](https://blog.spookysec.net/img/Pasted image 20220508190622.png)
 
