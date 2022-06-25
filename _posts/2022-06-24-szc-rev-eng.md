@@ -72,7 +72,7 @@ Let's try executing the program again and inputting our decimal string:
 And success! We have solved the first challenge.
 
 ### Solving with GDB
-For fun, let's solve this an alternate way using gdb. In order to do this, we will need to set a breakpoint on the comparison instruction (CMP DWORD[rbp-0x8], EAX) and set the value of the EAX register to a pointer to the DWORD value located on the stack. This is much simpler than it sounds. Let's start the program in GDB and update the syntax to Intel. 
+For fun, let's solve this an alternate way using gdb. To pull this off, we will set a breakpoint before the JNE (Jump if Not Equal to 0) and set this value to 1, so the program will not take the jump. To start, let's take a look at the program in GDB.
 
 ![[Pasted image 20220624221958.png]](https://blog.spookysec.net/img/Pasted image 20220624221958.png)
 
@@ -80,15 +80,17 @@ Let's start by disassembling the main function - We can see a large amount of pu
 
 ![[Pasted image 20220624222304.png]](https://blog.spookysec.net/img/Pasted image 20220624222304.png)
 
-We can see that at the memory address 0x0040193e there is a comparison against the value in the EAX and a local variable on the stack. The local variable is located at RBP-0x8. So, let's set a breakpoint before the JNE is executed and set the value of the EAX to a pointer to RBP-0x8. 
+We can see that at the memory address 0x0040193e there is a comparison against the value in the EAX and a local variable on the stack. The local variable is located at RBP-0x8. So, let's set a breakpoint before the JNE is executed.
 
 ![[Pasted image 20220624223305.png]](https://blog.spookysec.net/img/Pasted image 20220624223305.png)
 
-We've set our breakpoint with ``break *0x0000000000401941``, now we can ``run`` the program and enter a value into the prompt. If we display the values in the registers, we can see the value we input is in RAX. Specifically in the lower half EAX. Let's now set EAX to the pointer.
+We've set our breakpoint with ``break *0x0000000000401941``, now we can ``run`` the program and enter a value into the prompt. If we display the values in the registers, we can see the value we input is in RAX. Specifically in the lower half EAX. Let's dump the memory address that it's comparing EAX against. We can do so with the following command in GDB ``p /u *(int *)($rbp-0x8)``.
 
-![[Pasted image 20220624223531.png]](https://blog.spookysec.net/img/Pasted image 20220624223531.png)
+![[pic1.png]](https://blog.spookysec.net/img/pic1.png)
 
-After setting the value with ``set $eax = "DWORD PTR [rbp-0x8]"``, we can step through the program with ``s``, and our flag is printed to us!
+We can see that we have decoded the flag, this time in GDB! Let's try setting the Zero Flag in the FLAGS register to 1 so the program does not take the JMP instruction and will invoke the flag decoding function. This can be done in GDB by executing the following command ``set $eflags |= (1 << 6)``
+
+![[solution2.png]](https://blog.spookysec.net/img/solution2.png)
 
 Now that we've had a little bit of fun - let's get started on RE_2
 
