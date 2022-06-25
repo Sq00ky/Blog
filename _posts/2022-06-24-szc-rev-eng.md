@@ -29,12 +29,14 @@ date: '2022-06-24'
 ---
 
 Hello Everyone!
+
 Welcome to my Source Zero Con CTF Writeup Series. Today we're going to be tackling the Reverse Engineering challenges - RE 1 and RE 2 in the Baby XBee Category.
 
 The two challenges are fairly basic reverse engineering challenges. For this challenge, well be using a tool called "[Binary Ninja](https://binary.ninja/)". Szymex73 introduced me to this tool the other day, and I gotta say, it's one of the better disassemblers that I have worked with. Let's dive into it!
 
 ### Baby xBee - RE 1
 Download Link: [RE_1.zip](https://drive.google.com/file/d/1O8xSpCU-vWrMBhyd4g7MnnR93nuTW9S1/view?usp=sharing)
+
 To get started, let's launch the program and see what it does.
 
 ![[Pasted image 20220624205832.png]](https://blog.spookysec.net/img/Pasted image 20220624205832.png)
@@ -92,6 +94,7 @@ Now that we've had a little bit of fun - let's get started on RE_2
 
 ### Baby xBee - RE 2
 Download Link: [RE_2.zip](https://drive.google.com/file/d/1OmFxWTRJrannQRVeQTOUMkpKG0CAuMuW/view)
+
 This challenge is arguably easier than the first. When I was first doing this challenge, Szymex loaded up the binary in Binary Ninja, szy had began searching for the main function, while scrolling throughout the program the string "UPX" had caught my eye, making this challenge infinitely easier. The binary had been packed with UPX. We can verify this by grepping the binary for the string "UPX".
 
 ![[Pasted image 20220624224401.png]](https://blog.spookysec.net/img/Pasted image 20220624224401.png)
