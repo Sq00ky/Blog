@@ -157,8 +157,6 @@ At the 30 minute mark, we can see an HTTP request go out to ``http://192.168.80.
 
 ![[Pasted image 20220625011505.png]](https://blog.spookysec.net/img/Pasted image 20220625011505.png)
 
-This gives us the last few question answers. It appears the PCAP was shaved a few packets short of being able to answer all of the questions; however, our team happened to have the full PCAP from a previous CTF...
-
 This gives us the final answers of:
 | Question | Answer |
 |----------|----------|
