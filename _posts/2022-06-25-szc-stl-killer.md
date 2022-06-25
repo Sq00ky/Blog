@@ -138,8 +138,9 @@ We have a considerable amount of traffic here! Let's follow the TCP Stream!
 There appears to be reverse shell comms in cleartext. Nice! Analyzing the conversation, it appears that the attacker attempted to read the Web Developers SSH keys. The attacker then attempted to use the database password to access the ``web_dev``'s user account. The credentials re-use worked. The attacker then ran ``sudo -l`` to list all of binaries that ``web_dev`` could run as root. Vim was one of those binaries, so it was incredibly trivial to elevate privileges with ``sudo vim, enter, esc+:!/bin/bash``, giving the attacker a root shell.
 
 This answers several more questions for us:
+
 |Question|Answer|
-|-|-|
+|--------|------|
 |What was the database password?|BlueBerry!2021|
 |What was the name of the second user?|web_dev|
 |What's the name of the binary used to leverage the privesc to root?|vim|
