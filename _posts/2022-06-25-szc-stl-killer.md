@@ -158,6 +158,7 @@ At the 30 minute mark, we can see an HTTP request go out to ``http://192.168.80.
 ![[Pasted image 20220625011505.png]](https://blog.spookysec.net/img/Pasted image 20220625011505.png)
 
 This gives us the final answers of:
+
 | Question | Answer |
 |----------|----------|
 |What's the attacker's IP?|192.168.80.1|
