@@ -2,7 +2,7 @@
 
 layout: post
 
-title: Finding a Live Cobalt Strike C2 Server
+title: Cobalt Strike Beacon Analysis from a Live C2
 
 gh-badge:
 
