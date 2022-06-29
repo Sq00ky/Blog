@@ -30,9 +30,9 @@ date: '2022-06-29'
 ---
 Hello Everyone!
 
-Welcome back to a new type of post, this one is going to be a litte bit different from my normal blog posts. Today we're going to talk about a real live piece of malware that has been attributed to TA578, IcedID/Bokbot.
+Welcome back to a new type of post, this one is going to be a litte bit different from my normal blog posts. Today we're going to talk about a real live piece of malware that has been attributed to TA578 and IcedID/Bokbot.
 
-At the time of writing, I was able to locate a real live Cobalt sample thanks to Brad over at [@Malware_traffic](https://twitter.com/malware_traffic). If you're unfamiliar with him and his work, he works for Palo Alto Unit 42 and provides PCAP samples of malware running in his lab. It's a remarkable thing to do, and I hope others follow suit in the future. 
+At the time of writing, I was able to locate a real live Cobalt Strike sample thanks to Brad over at [@Malware_traffic](https://twitter.com/malware_traffic). If you're unfamiliar with him and his work, he works for Palo Alto Unit 42 and provides PCAP samples of malware running in his lab. It's a remarkable thing to do, and I hope others follow suit in the future. 
 
 Today, me and my coworker were doing some analysis of this [specific malware samples PCAP](https://www.malware-traffic-analysis.net/2022/06/27/index.html) that was posted and something interesting caught our eyes. We were able to identify that an adversary used Powershell to download another stage that had lead to Cobalt Strike. Here's the specific URL the Adversary hit:
 
@@ -40,7 +40,7 @@ Today, me and my coworker were doing some analysis of this [specific malware sam
 
 I have also saved this URL on Archive.org. Click [here](https://web.archive.org/web/20220629190838/https://solvesalesoft.com:8080/coin) at your own risk.
 
-I fired up my Kali VM and went to the URL mentioned above, and to my suprise - The URL was still live.
+I fired up my Kali VM and went to the URL mentioned above, and to my suprise - The URL was still live. Wow - We have a living C2 Server!
 
 ![[Pasted image 20220629180324.png]](https://blog.spookysec.net/img/Pasted image 20220629180324.png)
 
