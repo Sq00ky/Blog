@@ -2,7 +2,7 @@
 
 layout: post
 
-title: Source Zero Con CTF - STL KIller
+title: Source Zero Con CTF - STL Killer
 
 gh-badge:
 
