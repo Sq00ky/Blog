@@ -2,7 +2,7 @@
 
 layout: post
 
-title: Analyzing and Reverse Engineering a Brute Ratel Badger Beacon
+title: Analyzing a Brute Ratel Badger
 
 gh-badge:
 
