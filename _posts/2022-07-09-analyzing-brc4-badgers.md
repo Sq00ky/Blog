@@ -245,8 +245,8 @@ I've already loaded up the binary into Ghidra and there's a whole lot of nothing
 ## Misc Findings
 Here are some interesting things I found that I wanted to include in the post, but couldn't easily write into the flow of the post. I still think this is worth mentioning.
 
-### Chinese Threat Actor?
-Here is an interesting String Compare after executing a HTTP Request; it asppears that this badger is checking to see if some of the response headers contain ``xn--``. I believe this is set when the (potentially) Chinese threat actor generated the implant... More investigation would definitely be needed.
+### PUNYCode! The thing I forgot existed?
+Here is an interesting String Compare after executing a HTTP Request; it asppears that this badger is checking to see if some of the response headers contain ``xn--``. This may be a sign that a threat actor is spoofing a common domain like ``Google.com`` to ``http://xn--ggle-0nda.xn--om-ubc/``, which displays just like the normal domain does! Browser settings can be configured to always display xn--, though some by default will render the link as normal. Thanks to [@ShitSecure](https://twitter.com/ShitSecure/status/1546047868095631362) for pointing this out <3
 ![[Pasted image 20220709213754.png]](https://blog.spookysec.net/img/Pasted image 20220709213754.png)
 
 ### Traffic Generation to windowsupdate.com
