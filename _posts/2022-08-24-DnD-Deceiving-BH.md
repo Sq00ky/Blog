@@ -96,8 +96,11 @@ And there it is, da-richard's SID loaded into the registry. Let's start the Remo
 Ensure that the service start type is set to Automatic and is started. Once this is complete, the Remote Registry service should be running. One last thing worth noting - The Remote Registry service will stop if there is no activity on the workstation for some time, there is a registry key that must be updated for it to run 24/7.
 
 **Key Name:** HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\RemoteRegistry
+
 **Value:** DisableIdleStop
+
 **REG_DWORD:** 1
+
 
 One last thing **make sure you disable the Firewall**. By default, the Remote Registry service is filtered and you may not be able to see your session!
 
