@@ -104,7 +104,7 @@ Ensure that the service start type is set to Automatic and is started. Once this
 
 One last thing **make sure you disable the Firewall**. By default, the Remote Registry service is filtered and you may not be able to see your session!
 
-### Running SharpHound and Spinning up BloodHound
+### Running SharpHound
 Now that we have our deception setup, let's pretend that an attacker has compromised a Workstation Admin account and has the ability to collect session data, so in theory, if this deception object was deployed on a production system, an adversary would be none the wiser.
 
 ![[Pasted image 20220824213631.png]](https://blog.spookysec.net/img/Pasted image 20220824213631.png)
