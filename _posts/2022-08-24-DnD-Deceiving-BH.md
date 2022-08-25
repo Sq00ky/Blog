@@ -26,7 +26,7 @@ comments: true
 
 published: true
 
-date: '2022-07-24'
+date: '2022-08-24'
 
 ---
 
@@ -148,4 +148,6 @@ We can see immediately that theres a handful of user sessions on Lab-Wkst-2, goo
 
 ![[Pasted image 20220824220018.png]](https://blog.spookysec.net/img/Pasted image 20220824220018.png)
 
-And there it is. Plug-n-Play Deception.
+And there it is. Plug-n-Play Deception. Anyways - I hope you all enjoyed this entry in the Deception in Depth series. I have absolutely no idea when the next post will come out. I don't have anything hidden up my sleeve, but that doesn't mean I'll stop being passionate about deception. If you'd like to chat with me about Deception, feel free to reach out to me on [Twitter](https://twitter.com/NaisuBanana) or [LinkedIn](https://www.linkedin.com/in/rbartwitz/). I'd love to discuss new ideas, help develop and flesh out new methods, or even give some advice or share some experiences if Deception is something you're interested in bringing to your organization. 
+As always - Thank you for all for the love and support <3
+~ Ronnie
