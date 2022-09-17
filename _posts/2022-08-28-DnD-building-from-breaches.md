@@ -90,6 +90,7 @@ Now that we've completed our analysis on how they got to Domain Admin, we can th
 Putting everything together, you could do a number of things to develop deceptions for detection purposes. Let's start:
 - On a open portion of the network, you could deploy **Domain Joined** windows hosts with Firewalls disabled and SMB shares where Everyone has Read/Write privileges.
 	- You could take this a step further and customize this and develop a story. Is this an IT Infrastructure SMB Share? Is there IT Service manuals? Documentation? Spreadsheets? Network Maps? Scripts? The world is yours. Invent a story
+	- Use **real usernames** with fake credentials. Track login failures and correlate them with file reads to determine if you have a problem vs a serious problem.
 	- Monitoring could then be deployed on the host; when a user connects with credentials via SMB, send an alert to your Security Operations Center.
 - You could build out deceptive **PAM solutions**; use Single File (a Chrome/FireFox addon) to create a ""phishing"" pages for the attacker. Tie this into your scripts from the previous idea. Build out a HoneyNet. Make them think they hit the jackpot and found real valid credentials to your PAM system. 
 	- Once a user authenticates with your planted credentials, generate an alert. Send it off to the Security Operations Center
