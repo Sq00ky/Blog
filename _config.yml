@@ -40,11 +40,11 @@ links:
 
 # projects in header index
 projects:
+  - name: Session Spoofing
+    url: https://github.com/Sq00ky/SMB-Session-Spoofing
   - name: LeetLinked
     url: https://github.com/Sq00ky/LeetLinked
-  - name: Password Protected Python Backdoor
-    url: https://github.com/Sq00ky/Password-Protected-Python-Backdoor
-  - name: Tatami
-    url: https://github.com/OrielOrielOriel/tatami
+  - name: Clipboard Data Stealer
+    url: https://github.com/Sq00ky/Clipboard-Data-Stealer
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules']
