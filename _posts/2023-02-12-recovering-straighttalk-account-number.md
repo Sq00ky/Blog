@@ -46,40 +46,40 @@ Which is very disheartening as someone who's phone number is basically tied to t
 
 ### 1. Acquiring the Last Four of your Account Number
 The first thing you can do to make this search easier is find the last four digits of your account number. You can do this by texting ``FOUR`` to ``611611``.
-![[https://blog.spookysec.net/img/sc.png]]
+![[https://blog.spookysec.net/img/sc.png]](https://blog.spookysec.net/img/sc.png)
 
 If this is done correctly, you should recieve a message that tells you the last four of your IMEI/SIM. Let's pretend mine are 6161. You should check this against your current IMEI/SIM to make sure the numbers are indeed not the same. For the most part, you can pop out your SIM card and read the numbers, or go into your phone settings and search for IMEI and SIM. They should be in there someplace. If the numbers don't match - continue to follow along.
 
 ### 2. Verifying It's not in Manage Lines
 There's one more quick place you can check, which is under the "[Manage Lines](https://www.straighttalk.com/my-account/manage-lines)" page. Make sure the last four don't match any "Lines" associated with your account.
 
-![[https://blog.spookysec.net/img/Pasted image 20230212181933.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212181933.png]](https://blog.spookysec.net/img/Pasted image 20230212181933.png)
 
 As you can see, there are no IMEIs/SIM card numbers ending in 6161. So let's continue.
 
 ### 3. Inspecting HTTP Traffic to Recover your Account Number
 One of the most wonderful things about Web Applications is that they know things and can keep some things hidden from you that your browser may not render, but is definitely useful to you. How can we see the data that the server is sending to our Web Browser? Well, short answer, it depends. Ctrl+Shift+i is a common hotkey used to open up the "Inspect Element" portion of your Web Browser, what you've likely never noticed before is that there is a tab in there called "Networking". I've highlighted it in yellow on the screenshot below.
 
-![[https://blog.spookysec.net/img/Pasted image 20230212182511.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212182511.png]](https://blog.spookysec.net/img/Pasted image 20230212182511.png)
 
 This will show you all the resources that go into rendering the web page in front of you - This includes the stuff you see and the stuff you don't see. For example, if we wanted to grab an image (let's say the websites Icon), this would have a copy of it for us! 
 
-![[https://blog.spookysec.net/img/Pasted image 20230212182657.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212182657.png]](https://blog.spookysec.net/img/Pasted image 20230212182657.png)
 
 We can take this same exact prinicpal and apply it to Straight Talk's website - More specifically, your account dashboard. Login to Straight Talk's website if you haven't already, open up the Browser Dev Tools window with Ctrl+Shift+i, head over to Networking and browse to your Account Dashboard. 
 
-![[https://blog.spookysec.net/img/Pasted image 20230212182907.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212182907.png]](https://blog.spookysec.net/img/Pasted image 20230212182907.png)
 
 If successful, you should see approximately 400~ requests to and from the Server. If you don't, give the page a refresh with Ctrl+Shift+R and make sure the dev tools window is still open and that you're on the "Networking" tab. Next, make sure you're focused in on the Dev tools section and press "Ctrl+F" to search all of the Web Requests, then punch in the last four that you recieved from ``611611``. 
 
-![[https://blog.spookysec.net/img/Pasted image 20230212183142.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212183142.png]](https://blog.spookysec.net/img/Pasted image 20230212183142.png)
 
 As you can see below, there are 3 hits - You want to select the one from the Tracfone API that says "Profile". (https://webapigateway.tracfone.com/api/pub/customer-mgmt/customer/YOURCUSTOMERNUMBER/profile) Make sure that "Response is selected", Click on the window, press Ctrl+A and Ctrl+C to copy all the data in the window.
-![[https://blog.spookysec.net/img/Pasted image 20230212183321.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212183321.png]](https://blog.spookysec.net/img/Pasted image 20230212183321.png)
 
 After it is selected, head over to a JSON Beautifier website such as "[Cyberchef](https://gchq.github.io/CyberChef/#recipe=JSON_Beautify('%20%20%20%20',false,true))", or if you're not comfortable pasting this data into a website, just paste it into Notepad on your computer. As long as you have an easier way to view the data, it doesn't matter!
 
-![[https://blog.spookysec.net/img/Pasted image 20230212183818.png]]
+![[https://blog.spookysec.net/img/Pasted image 20230212183818.png]](https://blog.spookysec.net/img/Pasted image 20230212183818.png)
 
 You can either manually search for the number, or you can press CTRL+F and search for the last four and you should have found it, or at least I did. After this, I called up Straight Talk, spoke with a representative and asked if they could verify the Account Number I found here, They confirmed that the number I provided was indeed my account number and I began the port-out process. 
 
