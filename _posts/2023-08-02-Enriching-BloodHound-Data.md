@@ -67,7 +67,7 @@ BloodHound has a ton of incredibly useful prebuilt queries to help you find that
 
 **Cypher 101** - So, as we established before, BloodHound/Neo4j has Nodes, Relationships and Node properties. Let's say we wanted to find all the computers that a user is Admin to in the environment. We could find this by performing the following query:
 
-```Cypher
+```cypher
 MATCH p=(u:User)-[:AdminTo]->(c:Computer) WHERE u.name =~ "(?i)dave.+" RETURN p
 ```
 This query creates a variable, P. P contains a search for two nodes. A User and a Computer that is connected via a relationship. The relationship we care about here is AdminTo. Running this query in BloodHound/Neo4j **should** work if the data exists.
@@ -75,7 +75,7 @@ This query creates a variable, P. P contains a search for two nodes. A User and 
 ![[Pasted image 20230802132710.png]](https://blog.spookysec.net/img/Pasted image 20230802132710.png)
 
 We can see that we have a couple of sets of nodes where this is true. You may notice there is an extra set of relationships here that we didn't reference in the query, this being "HasSession". Neo4j likes to be more verbose than is necessary sometimes. Sometimes this is a great thing as you can see multiple interesting relationships when you execute a query like:
-```neo4j
+```cypher
 MATCH (u:User)-[:HasSession]->(c:Computer)
 ```
 You may discover (for example) that a user is an Administrator on that device and also has a session on that device. Important stuff. 
