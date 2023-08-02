@@ -134,13 +134,13 @@ So, back to Session collection. In modern day Windows, there are two important s
 The two have a very important distinction between them, a network session uses NetNTLM to validate their credentials (NetSession) when accessing a network based resource (like an SMB Share or NTLM Web Endpoints), meaning no credentials are stored in memory and the other being credentials are cached in memory (Session). So, how can we get that data from our SIEM(s)?
 
 It's actually pretty simple. I like Splunk, so I'm going to use SPL-style pseudo syntax to provide examples. We can execute a query like so:
-```splunk
+```Splunk
 index=CompanyName sourcetype=WinEvtLogs EventID=4624 AND (LogonType=2 OR LogonType=4 OR LogonType=5 OR LogonType=7 OR LogonType=9 OR LogonType=10 OR LogonType=11) | dedup ComputerName,UserName | table ComputerName,UserName
 ```
 
 This will search for EventID of 4624 (or a successful Windows Logon) for Logon types 2 (Interactive), 4 (Batch), 5 (Service), 7 (unlock), 9 (RunAs), 10 (Remote Interactive Logon), or 11 (Cached Creds). For more information, [see here this article from Ultimate Windows Security](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4624). This will give us our HasSession oriented relationships as if a user logs by those methods, credentials **should** stored in LSASS, or will be domain cached credentials. The other LogonTypes 3 (Network) and 8 (NetworkCleartext) types may not store it in memory like we hope. So, we can craft a similar but different query to give us that information. It may not be as important to us to collect this type of data, so use your best judgement on if its something you care about!
 
-```splunk
+```Splunk
 index=CompanyName sourcetype=WinEvtLogs EventID=4624 AND (LogonType=3 OR LogonType=8) | dedup ComputerName,UserName | table ComputerName,UserName
 ```
 
@@ -153,7 +153,7 @@ Okay, so that's great and all, but what are my options if my company doesn't use
 So - This is a bit more theory driven but has been tested and used. If you have a cloud-based EDR that has a full fledge SIEM (MDE, CrowdStrike, Elastic, etc.) you may be able to leverage that to collect the same data, just in a bit of a round about way. 
 
 Process Execution data can help here if your EDR isn't capturing logon events. Sometimes that data is exclusive to their identity product (ex. MDI or Falcon ITP). Because EDR is mostly process and endpoint protection centric. So, keeping this in mind we can craft a query that looks like so:
-```splunk
+```Splunk
 index=Events sourcetype=ProccessCreation peName=explorer.exe | dedup ComputerName,UserName | table ComputerName,UserName
 ```
 
@@ -303,7 +303,7 @@ MATCH (c:Computer {hasEDR:True}) RETURN c
 ![[Pasted image 20230802172151.png]](https://blog.spookysec.net/img/Pasted image 20230802172151.png)
 
 In BloodHound, we can see there is a new property called "hasEDR" and it's set to True. If you accidentally mess up the query by leaving some extra whitespace at the end of the file, you can run something like:
-```
+```cypher
 MATCH (c:Computer) SET (CASE WHEN c.name =~ "(?i).+" THEN c END).hasEDR = False
 ```
 
