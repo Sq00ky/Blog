@@ -59,7 +59,7 @@ And properties of nodes could be:
 - pwdLastSet
 - hasSPN
 Within the Nodes page above, there is a list of properties. An example can be found below:
-(https://blog.spookysec.net/img/Pasted image 20230802012019.png)![[Pasted image 20230802012019.png]]
+![[Pasted image 20230802012019.png]](https://blog.spookysec.net/img/Pasted image 20230802012019.png)
 
 Ultimately, BloodHound tries to find relevant paths between nodes to achieve a specific path to a specific thing based on the current level of access you have. Most often this can be described by a query like "Shortest path to Domain Admin from $X". $X can be a principal you have owned, or are targeting. 
 
@@ -72,7 +72,7 @@ MATCH p=(u:User)-[:AdminTo]->(c:Computer) WHERE u.name =~ "(?i)dave.+" RETURN p
 ```
 This query creates a variable, P. P contains a search for two nodes. A User and a Computer that is connected via a relationship. The relationship we care about here is AdminTo. Running this query in BloodHound/Neo4j **should** work if the data exists.
 
-(https://blog.spookysec.net/img/Pasted image 20230802132710.png)![[Pasted image 20230802132710.png]]
+![[Pasted image 20230802132710.png]](https://blog.spookysec.net/img/Pasted image 20230802132710.png)
 
 We can see that we have a couple of sets of nodes where this is true. You may notice there is an extra set of relationships here that we didn't reference in the query, this being "HasSession". Neo4j likes to be more verbose than is necessary sometimes. Sometimes this is a great thing as you can see multiple interesting relationships when you execute a query like:
 ```neo4j
@@ -82,15 +82,15 @@ You may discover (for example) that a user is an Administrator on that device an
 
 The same query can be executed in BloodHound and we should expect to see the same, or at least similar results.
 
-(https://blog.spookysec.net/img/Pasted image 20230802133228.png)![[Pasted image 20230802133228.png]]
+![[Pasted image 20230802133228.png]](https://blog.spookysec.net/img/Pasted image 20230802133228.png)
 
 Given this information here, how could we modify this query to search for Groups that are Admins to these computers? Or how could we modify the query to find out who Owns these computers? Remember that a Group or a User could own the computer. Research Cypher and figure out how you could query "Any Node type that has a relationship to this specific node". It shouldn't take too much tweaking :D
 
 This wraps up our Neo4j primer. If you find yourself confused, I'd recommend reading the Neo4j Cypher documentation and looking at some BloodHound Query CheatSheets. You can also enable "Query Debug Mode" which prints the queries that are being executed. This can be done by selecting the settings cog on the right and checking the checkbox.
-(https://blog.spookysec.net/img/Pasted image 20230802133657.png)![[Pasted image 20230802133657.png]]
+![[Pasted image 20230802133657.png]](https://blog.spookysec.net/img/Pasted image 20230802133657.png)
 
 You may then want to click on the "Raw Query" button. The next time you run a prebuilt query, you'll see the outputs below. Here is an example of "Find all Domain Admins":
-(https://blog.spookysec.net/img/Pasted image 20230802133839.png)![[Pasted image 20230802133839.png]]
+![[Pasted image 20230802133839.png]](https://blog.spookysec.net/img/Pasted image 20230802133839.png)
 
 So, we've talked about working with this data, but how is it collected? How can you collect it? How can you make your own interesting data?
 ### SharpHound Data Collection
@@ -170,7 +170,7 @@ MATCH (u:User) WHERE u.name =~ "(?i)da-daw.+@contoso.com" MATCH (c:Computer) WHE
 ```
 
 This should return our two nodes to the screen:
-(https://blog.spookysec.net/img/Pasted image 20230802161903.png)![[Pasted image 20230802161903.png]]
+![[Pasted image 20230802161903.png]](https://blog.spookysec.net/img/Pasted image 20230802161903.png)
 
 Now, we can *create* a relationship between the two nodes by adding this to the query:
 ```cypher
@@ -183,7 +183,7 @@ Entering this query will return no data. That is to be expected as this reduces 
 MATCH p=(u:User)-[:HasNetSession]->(c:Computer) RETURN p
 ```
 
-(https://blog.spookysec.net/img/Pasted image 20230802162136.png)![[Pasted image 20230802162136.png]]
+![[Pasted image 20230802162136.png]](https://blog.spookysec.net/img/Pasted image 20230802162136.png)
 
 Success! We have a template query that we can build off of. Alls we need to do is make sure we have some wiggle room with RegEx. This may lead to some false positive results *if* there's two servers with similar names (ex. Exchange and Exchange-DR), though I think we can tolerate that level of risk, as it can manually be validated and cleaned up later.
 
@@ -236,7 +236,7 @@ administrator,workstation42
 We could modify this to take in a third column which could be a relationship value. This may make it a bit more flexible as we could merge our two lists (HasNetSession and HasSession) and differentiate the two by the third column. This is merely a suggestion though. I'd encourage you all to go try to implement that yourselves. It shouldn't be too big of a lift!
 
 After executing the Python Script, we should receive an error or so complaining that execute_query may be removed... Just ignore that. We can now see our results below!
-(https://blog.spookysec.net/img/Pasted image 20230802165410.png)![[Pasted image 20230802165410.png]]
+![[Pasted image 20230802165410.png]](https://blog.spookysec.net/img/Pasted image 20230802165410.png)
 
 If you scale it up, I'd recommend functionalizing it and implementing multi-threading. Be warned, Neo4j transactions can time out, so rate limiting is important too. Or figuring out how to execute bulk queries.
 
@@ -251,7 +251,7 @@ This presents an interesting opportunity to show where there is EDR visibility g
 
 Ok, analysis of thingz aside, let's use MDE as an example. This [document page from Microsoft](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/machines-view-overview?view=o365-worldwide) shows how you can go to your device inventory and export hosts.
 
-(https://blog.spookysec.net/img/Pasted image 20230802170943.png)![[Pasted image 20230802170943.png]]
+![[Pasted image 20230802170943.png]](https://blog.spookysec.net/img/Pasted image 20230802170943.png)
 Notice in the left side below the count, there is an export button. You'll need to determine what CSV field has the name (likely the first?). So, we'll go off of this. We're going to make a slight modification to our first script to create a new property.
 
 ```python
@@ -300,7 +300,7 @@ You can try this in Neo4j/BloodHound if you'd like to see it in action. Else, co
 ```cypher
 MATCH (c:Computer {hasEDR:True}) RETURN c
 ```
-(https://blog.spookysec.net/img/Pasted image 20230802172151.png)![[Pasted image 20230802172151.png]]
+![[Pasted image 20230802172151.png]](https://blog.spookysec.net/img/Pasted image 20230802172151.png)
 
 In BloodHound, we can see there is a new property called "hasEDR" and it's set to True. If you accidentally mess up the query by leaving some extra whitespace at the end of the file, you can run something like:
 ```
@@ -309,7 +309,7 @@ MATCH (c:Computer) SET (CASE WHEN c.name =~ "(?i).+" THEN c END).hasEDR = False
 
 to revert the results back to a clean slate. If you want to view the inverse, you can modify the query to `hasEDR: False` instead. Fairly straight forward!
 
-(https://blog.spookysec.net/img/Pasted image 20230802172333.png)![[Pasted image 20230802172333.png]]
+![[Pasted image 20230802172333.png]](https://blog.spookysec.net/img/Pasted image 20230802172333.png)
 
 It looks like someone might have some cleaning up to do! There are other tools that one could use to query this data without your EDR platform (ex. Using the IPC$ share to see if your EDR process has an open pipe). You could use a project like [serviceDetector](https://github.com/tothi/serviceDetector/tree/main) to build a CSV if you don't have access to that kind of data.
 
