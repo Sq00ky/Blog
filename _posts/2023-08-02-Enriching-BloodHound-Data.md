@@ -37,7 +37,7 @@ date: '2023-08-02'
 I'm going to preface this post with BloodHound is an awesome tool. It's one of the best tools in my mind that's ever been introduced to Information Security; It empowers Pentesters, Red Teams and Identity Security professionals to identify and remediate attack paths within their own environment. Since their announcement of "BloodHound Community Edition" (BHCE) on 8/1, I've always wanted to write a blog post on how you can extend BloodHound's functionality. I'm still a ways off of that, but I still wanted to throw something out there as a celebration to SpecterOps and how you can enrich your data.
 
 So, what'll we be discussing today? Excellent question dear writer! We're going to be talking about enriching information on Login Information and Kerberoastable users. Though, first I want to talk a little bit about BloodHound/SharpHound and it's current architecture/functionality so we're all on the same playing field as I'm going to geek out on Neo4j in a little while. So let's dive into it!
-### BloodHound/SharpHound Architecture
+### BloodHound/SharpHound/Neo4j Basics
 For those of you who aren't aware, BloodHound is an electron application that interfaces with a a graphing database called Neo4j. Neo4j is fairly simple to digest, you have Nodes and Relationships. Some practical examples of Nodes are:
 - Users
 - Computers
