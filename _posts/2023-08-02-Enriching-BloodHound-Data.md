@@ -206,8 +206,8 @@ except Exception as e:
 
 # Looping throug the lines in the file
 for LINE in f:
-		#Stipping unnecessary characters out to ensure the N4j query doesn't fail
-		n4jlist = LINE.split(",")
+	#Stipping unnecessary characters out to ensure the N4j query doesn't fail
+	n4jlist = LINE.split(",")
         username = n4jlist[0].strip("\n")
         username = username.strip("\"")
         username = username.strip("'")
@@ -215,13 +215,13 @@ for LINE in f:
         computer = computer.strip("\"")
         computer = computer.strip("'")
 # Debug print statement
-		print("Creating Session Relationship for " + username + " on " + computer)
-		# Our query template
+	print("Creating Session Relationship for " + username + " on " + computer)
+	# Our query template
         queryTemplate = 'MATCH (u:User) WHERE u.name =~ "(?i)' + username + '.+" MATCH (c:Computer) WHERE c.name =~ "(?i)' + computer + '.+" CREATE (u)-[r:HasSession]->(c)'
-		# Printing our query template
+	# Printing our query template
         print(queryTemplate)
         try:
-		        # Using the Neo4j driver to execute our query against the Neo4j database.
+	        # Using the Neo4j driver to execute our query against the Neo4j database.
                 neo4jdbDriver.execute_query(queryTemplate, database='neo4j')
         except Exception as e:
                 print("An error occured while executing the query: " + str(e))
@@ -272,16 +272,16 @@ except Exception as e:
 
 # Looping throug the lines in the file
 for LINE in f:
-		#Stipping unnecessary characters out to ensure the N4j query doesn't fail
-		n4jlist = LINE.split(",")
+	#Stipping unnecessary characters out to ensure the N4j query doesn't fail
+	n4jlist = LINE.split(",")
         computer = n4jlist[0].strip("\n")
         computer = computer.strip("\"")
         computer = computer.strip("'")
 # Debug print statement
-		print("Setting hasEDR for on " + computer)
-		# Our query template
+	print("Setting hasEDR for on " + computer)
+	# Our query template
         queryTemplate = 'MATCH (c:Computer) SET (CASE WHEN c.name =~ "(?i)' + computer + '.+" THEN c END).hasEDR = True'
-		# Printing our query template
+	# Printing our query template
         print(queryTemplate)
         try:
 		        # Using the Neo4j driver to execute our query against the Neo4j database.
