@@ -1,6 +1,6 @@
 # Site settings
 title: SpookySec
-description: "root@SpookySec:~#"
+description: "root@PandorasBox:~#"
 baseurl: "/" # for test: remove string '/space-jekyll-template' to ''
 url: "https://blog.spookysec.net/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
 
