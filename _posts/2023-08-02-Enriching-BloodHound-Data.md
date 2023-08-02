@@ -101,7 +101,7 @@ If you're not aware, SharpHound is the collector for BloodHound - It creates a b
 - Who is Currently Logged In
 
 and several other things. I recommend you refer to [this page in the BloodHound docs that explains all of SharpHounds flags](https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound-all-flags.html). There is a really awesome Cheat Sheet by [@SadProcessor](https://twitter.com/SadProcessor) that outlines how each thing is enumerated, what privileges are required and more. It also includes some handy references for Neo4j. 
-(https://bloodhound.readthedocs.io/en/latest/_images/SharpHoundCheatSheet.png)[https://bloodhound.readthedocs.io/en/latest/_images/SharpHoundCheatSheet.png]
+![[https://bloodhound.readthedocs.io/en/latest/_images/SharpHoundCheatSheet.png]](https://bloodhound.readthedocs.io/en/latest/_images/SharpHoundCheatSheet.png)
 
 After gazing at the wonderful illustration for a minute, there are a couple of things that catches my attention
 - LoggedOn/Session enumeration require Admin access on Server 2016+ and Win10 1607+. 
