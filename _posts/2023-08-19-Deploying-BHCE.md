@@ -29,6 +29,7 @@ date: '2023-08-19'
 ---
 
 Hello everyone! 
+
 I know this post is a bit late, blame Blackhat/DEFCON, but I wanted to put a guide together for deploying BloodHound Community Edition for Pentesters and Red Teams. This is going to be more of an Administration guide than a "how to use cool new thing" - the core components of BHCE are the same as BloodHound Classic.
 
 So, the reason for writing this post: I deployed BHCE at the company I work for and I ran into some things I've never had to do before, so I thought this might be a good topic to write a blog post on. So, here's all the topics we're going to cover today:
