@@ -55,6 +55,7 @@ apt install docker-compose
 This will install Docker-Compose, Docker, and all it's dependencies. Next, we'll want to pull down two files from the **SpecterOps BloodHound** repository, it can be found [here](https://github.com/SpecterOps/BloodHound). Be careful not to confuse it with the BloodHoundAD BloodHound repository. That repository will soon be archived and will no longer be supported. Anyways - continuing on. From the repo, we want to grab the following files:
 - [Docker-Compose.yml](https://github.com/SpecterOps/BloodHound/blob/main/examples/docker-compose/bloodhound.config.json)
 - [BloodHound.config.json](https://github.com/SpecterOps/BloodHound/blob/main/examples/docker-compose/bloodhound.config.json)
+
 I recommend creating a new folder in ``/opt/`` called "BloodHound" to store these files, alternatively, you can just clone the whole repository and copy the BloodHound.config.file. This can be done with the following commands:
 ```bash
 git clone https://github.com/SpecterOps/BloodHound.git /opt/BloodHound
