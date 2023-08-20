@@ -42,7 +42,7 @@ So, the reason for writing this post: I deployed BHCE at the company I work for 
 
 Note: *that some sections might be a little bit longer and exact steps may change from version to version. I'll try my best to keep this updated, but I generally don't update older blog posts*
 
-## Deploying BloodHound Community Edition
+### Deploying BloodHound Community Edition
 Before we begin, some pre-requisites are required:
 - A Linux Server 
 - Network Access
@@ -83,7 +83,7 @@ You will now be able to login with the initial set password.
 Upon logging in, you will be prompted to change the default password. This password must meet a certain set of complexity requirements.
 
 ![[Pasted image 20230819235531.png]](https://blog.spookysec.net/img/Pasted image 20230819235531.png)
-## Modifying the BloodHound and Docker Config Files
+### Modifying the BloodHound and Docker Config Files
 
 Something super important to note is this may expose you to potential attacks. Often BloodHound may be used on hostile networks like HackTheBox, TryHackMe, or another environment, so additional hardening steps may be a good idea. I'm going to run with this to show you a **basic** modification of the config files - later we'll deploy SSL/TLS.
 
@@ -118,7 +118,7 @@ Now, if an attacker tries to connect to our BloodHound instance, they will be un
 }
 ```
 
-# Creating User Accounts
+### Creating User Accounts
 As always, in a team setting it's bad practice to use the default Administrator user as your personal user account, so in this next section, we'll show you how to create a new user. We can do this by navigating to the settings cog, selecting "Administration", then "[Manage Users](http://localhost:8080/ui/administration/manage-users)".
 ![[Pasted image 20230820001244.png]](https://blog.spookysec.net/img/Pasted image 20230820001244.png)
 
@@ -147,7 +147,7 @@ For awareness, it's possible to disable, force password changes, change password
 
 ![[Pasted image 20230820002428.png]](https://blog.spookysec.net/img/Pasted image 20230820002428.png)
 
-## Setting up Multi-Factor Authentication
+### Setting up Multi-Factor Authentication
 Continuing our hardening best practices, multi-factor authentication can be setup on per-user basis. Unfortunately, it does not look like there is a way to force MFA at this time, so it would be best to setup an internal policy that requires each user to have MFA configured due to BloodHound containing sensitive data.
 
 MFA can be configured by navigating to the settings cog and then selecting "[My Profile](http://localhost:8080/ui/my-profile)".
@@ -170,7 +170,8 @@ The next time you login, you'll be prompted to input your MFA token.
 ![[Pasted image 20230820003125.png]](https://blog.spookysec.net/img/Pasted image 20230820003125.png)
 
 And that's it, that's the MFA setup. Super simple. If you need to disable MFA, you just need to go back to your profile and select the toggle button. It will require you to input your password again, and then MFA will be disabled. There does not currently appear to be a way to reset the MFA token, so if you lose your token it may be lost for good and you may have to delete/re-create the user account, so be careful!
-# Deploying SSL/TLS
+
+### Deploying SSL/TLS
 SSL/TLS is absolutely necessary in my opinion if you're working in a team - by default BHCE does **not** come with a self-signed certificate, it only runs on HTTP as you may have already noticed. This is a bad idea for a number of reasons, most importantly, you don't want someone to snoop on your password! So - how can we deploy HTTPS? 
 
 Great question. I struggled with this for quite a bit since I had no prior experience with Docker. Generating SSL/TLS certs are fairly easy, most often this consists of submitting a request to your PKI team. You may have to do some OpenSSL magic to create a .cer and a .pem file. Make sure that your .pem file is **not** password protected. There are plenty of guides out there on how to extract various things from various formats. I'm going to use CloudFlare to create a SSL certificate for me. 
@@ -215,7 +216,7 @@ While we're on the topic of best practices, there's a few things that I think ar
 		- This should be changed before making them public facing.
 	- PostgreSQL suffers the same issue
 
-## Backgrounding Docker
+### Backgrounding Docker
 This is our last section - Backgrounding our docker container. We've made a lot of good configuration changes. Don't be like me, go away from lunch, shut the laptop and one of your coworkers tries to access the BHCE instance and it's not working. Why's that? The SSH connection to your BHCE server was terminated!
 
 To prevent this, we're going to detach the container by stopping the container and restarting it with the following command:
