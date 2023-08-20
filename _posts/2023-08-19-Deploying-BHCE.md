@@ -215,6 +215,7 @@ While we're on the topic of best practices, there's a few things that I think ar
 	- By default, the username and password for BHCE's Neo4j database is neo4j:bloodhoundcommunityedition
 		- This should be changed before making them public facing.
 	- PostgreSQL suffers the same issue
+ - Binding to a specific interface's IP address instead of quad 0 may be better if you don't want to bind to your loopback interface.
 
 ### Backgrounding Docker
 This is our last section - Backgrounding our docker container. We've made a lot of good configuration changes. Don't be like me, go away from lunch, shut the laptop and one of your coworkers tries to access the BHCE instance and it's not working. Why's that? The SSH connection to your BHCE server was terminated!
