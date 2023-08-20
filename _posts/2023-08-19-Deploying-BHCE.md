@@ -219,7 +219,7 @@ While we're on the topic of best practices, there's a few things that I think ar
  - Binding to a specific interface's IP address instead of quad 0 may be better if you don't want to bind to your loopback interface.
 
 ### Backgrounding Docker
-This is our last section - Backgrounding our docker container. We've made a lot of good configuration changes. Don't be like me, go away from lunch, shut the laptop and one of your coworkers tries to access the BHCE instance and it's not working. Why's that? The SSH connection to your BHCE server was terminated!
+This is our last section - Backgrounding our docker container. We've made a lot of good configuration changes. Don't be like me, go away for lunch, shut the laptop and one of your coworkers tries to access the BHCE instance and it's not working. Why's that? The SSH connection to your BHCE server was terminated!
 
 To prevent this, we're going to detach the container by stopping the container and restarting it with the following command:
 ```bash
