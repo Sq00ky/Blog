@@ -235,4 +235,5 @@ docker-compose down
 I recommend creating some aliases to do this just to expedite the process, especially if you're not a Docker power-user. This is my first real experience with using Docker and it's been a bit of a struggle, so I thought I'd share some of the things I learned just to help make your all's life a little bit easier.
 
 Anyways, I hope this helps :D
+
 ~ Ronnie
