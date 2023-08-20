@@ -38,13 +38,15 @@ So, the reason for writing this post: I deployed BHCE at the company I work for 
 - Setting up Multi-Factor Authentication
 - Deploying SSL/TLS
 - Backgrounding Docker
+
 Note: *that some sections might be a little bit longer and exact steps may change from version to version. I'll try my best to keep this updated, but I generally don't update older blog posts*
 
-# Deploying BloodHound Community Edition
+## Deploying BloodHound Community Edition
 Before we begin, some pre-requisites are required:
 - A Linux Server 
 - Network Access
 - Docker/Docker-Compose
+  
 That's pretty much it! As long as you have those things, you should be able to get started. I'll be using Kali for the deployment, we can install Docker with the following command:
 ```
 apt install docker-compose
@@ -80,7 +82,7 @@ You will now be able to login with the initial set password.
 Upon logging in, you will be prompted to change the default password. This password must meet a certain set of complexity requirements.
 
 ![[Pasted image 20230819235531.png]](https://blog.spookysec.net/img/Pasted image 20230819235531.png)
-# Modifying the BloodHound and Docker Config Files
+## Modifying the BloodHound and Docker Config Files
 
 Something super important to note is this may expose you to potential attacks. Often BloodHound may be used on hostile networks like HackTheBox, TryHackMe, or another environment, so additional hardening steps may be a good idea. I'm going to run with this to show you a **basic** modification of the config files - later we'll deploy SSL/TLS.
 
@@ -144,7 +146,7 @@ For awareness, it's possible to disable, force password changes, change password
 
 ![[Pasted image 20230820002428.png]](https://blog.spookysec.net/img/Pasted image 20230820002428.png)
 
-# Setting up Multi-Factor Authentication
+## Setting up Multi-Factor Authentication
 Continuing our hardening best practices, multi-factor authentication can be setup on per-user basis. Unfortunately, it does not look like there is a way to force MFA at this time, so it would be best to setup an internal policy that requires each user to have MFA configured due to BloodHound containing sensitive data.
 
 MFA can be configured by navigating to the settings cog and then selecting "[My Profile](http://localhost:8080/ui/my-profile)".
@@ -211,7 +213,8 @@ While we're on the topic of best practices, there's a few things that I think ar
 	- By default, the username and password for BHCE's Neo4j database is neo4j:bloodhoundcommunityedition
 		- This should be changed before making them public facing.
 	- PostgreSQL suffers the same issue
-# Backgrounding Docker
+   
+## Backgrounding Docker
 This is our last section - Backgrounding our docker container. We've made a lot of good configuration changes. Don't be like me, go away from lunch, shut the laptop and one of your coworkers tries to access the BHCE instance and it's not working. Why's that? The SSH connection to your BHCE server was terminated!
 
 To prevent this, we're going to detach the container by stopping the container and restarting it with the following command:
