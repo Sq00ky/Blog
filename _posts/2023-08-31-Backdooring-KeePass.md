@@ -181,4 +181,4 @@ Though, role play with me for a second: You're on a Red Team engagement and you 
 
 Anyways, that's all I've got for you today. Thanks for the continued support, it means the world to me <3
 
-- Ronnie
+~ Ronnie
