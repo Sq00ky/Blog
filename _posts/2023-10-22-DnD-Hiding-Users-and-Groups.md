@@ -108,7 +108,7 @@ Ingestion process finished with little to no issues, let's check out our graph:
 ![[Pasted image 20231020012614.png]](https://blog.spookysec.net/img/Pasted image 20231020012614.png)
 
 ![[doggie-happy.gif]]
-(https://blog.spookysec.net/img/doggie-happy.gif])
+(https://blog.spookysec.net/img/doggie-happy.gif]
 We've dunnit! We broke the pre-built "Find all Domain Admins" query. Okay! So we're well on our way - Jumping back, it is still possible to do some user enumeration in here, we can still gain *some* information via groups the user may be in - Note that we **do not** have permission to view a lot of critical information like the Domain Admin and Enterprise Admins groups and others. A good example is the "Group Policy Creator Owners" group, and another is the Outbound Object Control over the Domain:
 
 ![[Pasted image 20231020170200.png]](https://blog.spookysec.net/img/Pasted image 20231020170200.png)
