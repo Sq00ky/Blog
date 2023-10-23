@@ -37,7 +37,7 @@ Like I said, AD is very read permissive, and gives you a lot of flexibility in t
 ![[Pasted image 20231019214453.png]](https://blog.spookysec.net/img/Pasted image 20231019214453.png)
 
 ### Piecing it Together
-So, you may already be starting to pick up on this - You can also deny things (Users, for example) the ability to read properties of a given object. In short, you could theoretically create a new group to deny that is denied the ability to read Members of the Domain Admins group for example. Let's take a look at how this would be accomplished. First, we're going to need to create a new group:
+So, you may already be starting to pick up on this - You can also deny things (Users, for example) the ability to read properties of a given object. In short, you could theoretically create a new group to deny that is denied the ability to read Members of the Domain Admins group for example (**After published note: Privileged groups will not survive this change unless you modify the AdminSDHolder object. How to do this is shown later in this post.**). Let's take a look at how this would be accomplished. First, we're going to need to create a new group:
 
 ![[Pasted image 20231019214934.png]](https://blog.spookysec.net/img/Pasted image 20231019214934.png)
 
