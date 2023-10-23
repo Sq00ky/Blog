@@ -154,4 +154,5 @@ I feel like I have to put one more section in before we I close out the blog pos
 Okay! I think I hit them all, or at least all I wanted to cover, or at least all that I can think of. It's a big daunting topic. This was a big post, but is going to set the foundation for our next blog post where we dive into the methodology of creating Deceptive Accounts, OUs and Groups. In theory, we've thwarted off initial attackers initial attempts at enumerating and will now be counting on attackers to resort to manual enumeration to attempt to identify paths of lateral movement. This is where we will start to engage deceptive tactics to identify & trap attackers. The way I like to phrase this is "We've backed a wild animal in the corner - if it wants to attack, it has one clear path forward." That being to enumerate harder and make more noise. 
 
 That's all for today friends! I'm planning on splitting this up in a few different posts to be able to target different people & organize my thoughts a bit better for different sections. I think this could be a game changer for deception & security ops in general. 
+
 ~ Ronnie
