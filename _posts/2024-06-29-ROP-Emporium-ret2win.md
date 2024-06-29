@@ -12,7 +12,7 @@ tags:
   - Exploitation
 comments: true
 published: true
-date: 2024-06-29
+date: 2024-06-28
 ---
 
 Wow, it's been a long while since I've written one of these things. Just over 7 months to be exact, going forward into '24, I should really be better about that.
@@ -62,11 +62,11 @@ That's pretty much it for the administrative tasks - I won't go into details on 
 ### Finding the EIP Offset
 The very first task we have is to overflow the buffer. First, let's run the program and get used to the input and output excepted by the program:
 
-![[Pasted image 20240629001347.png]](https://blog.spookysec.net/img/Pasted image 20240629001347.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629001347.png]](https://blog.spookysec.net/img/Pasted image 20240629001347.png)
 
 Fairly straight forward - running the program prompts us for input. We can try a simple overflow by having Python print a ton of A's for us.
 
-![[Pasted image 20240629001518.png]](https://blog.spookysec.net/img/Pasted image 20240629001518.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629001518.png]](https://blog.spookysec.net/img/Pasted image 20240629001518.png)
 ``python -c 'import sys;sys.stdout.buffer.write(b"A" * 400)' | ./ret2win32``
 
 Okay, neat! Segfaults are an indicator that the program crashed, let's look at dmesg for more info:
@@ -80,11 +80,11 @@ It appears that we've overwritten the IP (Instruction Pointer) with all As (\x41
 
 Its great that we have control of the instruction pointer because as said before, it allows us to control the execution flow and that's great and all, but we need to have specific control of the instruction pointer to control the execution flow. How exactly can we do that? Fortunately for us, it's actually pretty simple. We can use a cyclical pattern that doesn't repeat to figure out the exact value that the EIP will store. The observant among you may have noticed the tool we're going to use - Pattern_Create && Patern_Offset. 
 
-![[Pasted image 20240629082230.png]](https://blog.spookysec.net/img/Pasted image 20240629082230.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629082230.png]](https://blog.spookysec.net/img/Pasted image 20240629082230.png)
 
 The program itself is relatively straight forward - you just need to supply it a length value and it'll generate a pattern for us. After generated, we can supply it to ret2win32 and we can observe our crash.
 
-![[Pasted image 20240629082448.png]](https://blog.spookysec.net/img/Pasted image 20240629082448.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629082448.png]](https://blog.spookysec.net/img/Pasted image 20240629082448.png)
 
 We'll check dmesg one last time and see that the value \x35\x62\x41\x34 made it into the EIP which converts to 5bA4. Wait, 5bA4? That wasn't in our pattern? At Offset 44 of the string we have 4Ab5. This has gotta be some sort of mistake, right? 
 
@@ -105,13 +105,13 @@ In GDB, the syntax to run a command while in the debugger is something like so:
 run < <(python -c 'import sys;sys.stdout.buffer.write(b"A" * 44 + b"\x31\x33\x33\x37")')
 ```
 
-![[Pasted image 20240629094039.png]](https://blog.spookysec.net/img/Pasted image 20240629094039.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629094039.png]](https://blog.spookysec.net/img/Pasted image 20240629094039.png)
 
 It looks like we have control over the EIP and the value 1337 made it in, though it's in Big Endian format right now, not Little Endian. We know this because it's the same string but reversed. Let's try DEAD this time:
-![[Pasted image 20240629094258.png]](https://blog.spookysec.net/img/Pasted image 20240629094258.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629094258.png]](https://blog.spookysec.net/img/Pasted image 20240629094258.png)
 Again, we can see the order is reversed. D->A->E->D, so we'll want to keep this in mind anytime we want to inject a specific value into memory. Fortunately for us, [CyberChef has a Swap Endianness recipe that we can use!](https://gchq.github.io/CyberChef/#recipe=Swap_endianness('Hex',4,true)From_Hex('Auto')&input=MHgzNzMzMzMzMQ)
 
-![[Pasted image 20240629094521.png]](https://blog.spookysec.net/img/Pasted image 20240629094521.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629094521.png]](https://blog.spookysec.net/img/Pasted image 20240629094521.png)
 
 ### Redirecting the Execution Flow
 Believe it or not, we're closer to the end than you might think - we need to find out what exactly it is that we want to do with our control. Well, let's take a look at the program in Ghidra. There's a couple ways we could theoretically solve it:
@@ -121,22 +121,22 @@ Believe it or not, we're closer to the end than you might think - we need to fin
 
 We can see there's two main functions being called Main && PwnMe. Though, there's another function called Ret2Win, we'll take a look at that in a moment.
 
-![[Pasted image 20240629100204.png]](https://blog.spookysec.net/img/Pasted image 20240629100204.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629100204.png]](https://blog.spookysec.net/img/Pasted image 20240629100204.png)
 *Main Function Disassembled*
 
-![[Pasted image 20240629100257.png]](https://blog.spookysec.net/img/Pasted image 20240629100257.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629100257.png]](https://blog.spookysec.net/img/Pasted image 20240629100257.png)
 *PwnMe function decompiled*
 
 We can see that our buffer size is actually 40 bytes of space, despite needing 44 to control the value in the EIP. 
 
-![[Pasted image 20240629101037.png]](https://blog.spookysec.net/img/Pasted image 20240629101037.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629101037.png]](https://blog.spookysec.net/img/Pasted image 20240629101037.png)
 *Ret2Win function decompiled*
 
 Well, a /bin/cat flag.txt certainly seems promising. So, using control of the instruction pointer, how can we call this function? Well, because it doesn't take any arguments it's actually super easy *assuming ASLR is disabled*, we just need to supply the memory address of ret2win in Little Endian format.
 
 Looping back over to GDB - we can call ``print functionnamehere`` to retrieve the addess:
 
-![[Pasted image 20240629101256.png]](https://blog.spookysec.net/img/Pasted image 20240629101256.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629101256.png]](https://blog.spookysec.net/img/Pasted image 20240629101256.png)
 *Printing the Ret2Win function address and function disassembly*
 
 Alls we need to do is replace our \x31\x33\x33\x37 with is the address of 0x0804862c and we *should* have the output of the flag file. Let's give it a try.
@@ -145,7 +145,7 @@ Alls we need to do is replace our \x31\x33\x33\x37 with is the address of 0x0804
 run < <(python -c 'import sys;sys.stdout.buffer.write(b"A" * 44 + b"\x2c\x86\x04\x08")')
 ```
 
-![[Pasted image 20240629101918.png]](https://blog.spookysec.net/img/Pasted image 20240629101918.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629101918.png]](https://blog.spookysec.net/img/Pasted image 20240629101918.png)
 
 We can see that our command executed successfully! Great!  Let's make sure we can run this outside of the debugger.
 
@@ -153,15 +153,15 @@ We can see that our command executed successfully! Great!  Let's make sure we ca
 python -c 'import sys;sys.stdout.buffer.write(b"A" * 44 + b"\x2c\x86\x04\x08")' | ./ret2win32
 ```
 
-![[Pasted image 20240629185114.png]](https://blog.spookysec.net/img/Pasted image 20240629185114.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629185114.png]](https://blog.spookysec.net/img/Pasted image 20240629185114.png)
 
 Success! We still get a segfault, though which sucks. Let's add a quick call to the exit() function just to make sure everything is nice and clean:
 
-![[Pasted image 20240629185244.png]](https://blog.spookysec.net/img/Pasted image 20240629185244.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629185244.png]](https://blog.spookysec.net/img/Pasted image 20240629185244.png)
 *GDB Output of print exit, then adding the memory address of exit to our python one-liner.*
 
 Much better! To be honest, I had much more grand plans for this post, like making it an SUID binary and spawning a shell, but those kind of fell through with the specific language of "I will attempt to fit 56 bytes of user input into a 32-bytes of stack buffer", which we can see if we actually read the function. This is why Reverse Engineering is important, same w/ Shellcode size - it's very easy to exceed the buffer size limitations and that matters. It can completely break your plans.
 
-![[Pasted image 20240629185543.png]](https://blog.spookysec.net/img/Pasted image 20240629185543.png)
+![[https://blog.spookysec.net/img/Pasted image 20240629185543.png]](https://blog.spookysec.net/img/Pasted image 20240629185543.png)
 
 Anyways, I even learned something out of this one. In the next post we'll move onto Split
