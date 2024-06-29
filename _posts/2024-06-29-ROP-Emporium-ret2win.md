@@ -12,7 +12,7 @@ tags:
   - Exploitation
 comments: true
 published: true
-date: 2024-06-28
+date: 2024-06-29
 ---
 
 Wow, it's been a long while since I've written one of these things. Just over 7 months to be exact, going forward into '24, I should really be better about that.
