@@ -31,12 +31,8 @@ Well, that's neat. What else can we gather. Better Homes and Gardens in the back
 
 Well, as it turns out, this can be used to trace the originating location of the mail. This is a barcode called the "Intelligent Mail Barcode". I tried to look up an OCR tool to expedite the process, but ultimately, I couldn't find one. This is honestly probably just a skill issue, but I knew what I had to do once I saw it. Armed with this online utility from [USPS](https://postalpro.usps.com/ppro-tools/encoder-decoder), I was on a quest. Each bar represents a "key". This key is used to translate into a code, which they then parse into a location. Magic.
 
-| Key | Icon                                 | Description    |
-| --- | ------------------------------------ | -------------- |
-| F   | ![[Pasted image 20240903225605.png]](https://blog.spookysec.net/img/Pasted image 20240903225605.png) | Full Bar       |
-| D   | ![[Pasted image 20240903225611.png]](https://blog.spookysec.net/img/Pasted image 20240903225611.png) | Descending Bar |
-| A   | ![[Pasted image 20240903225616.png]](https://blog.spookysec.net/img/Pasted image 20240903225616.png) | Ascending Bar  |
-| T   | ![[Pasted image 20240903225621.png]](https://blog.spookysec.net/img/Pasted image 20240903225621.png) | Track Bar      |
+![[chart.png]](https://blog.spookysec.net/img/chart.png)
+
 So, let's practice, the first set is. DAFFFDDFTTF. One descending, one ascending, three full bars, two descending, one full, two tracks and one full. Eventually, the whole thing will be decoded and we'll be left with the following answer:
 ![[Pasted image 20240903225956.png]](https://blog.spookysec.net/img/Pasted image 20240903225956.png)
 **82336**. This is a ZIP code that belongs to **Wamsutter, Wyoming**. Definitely the middle of nowhere. 
