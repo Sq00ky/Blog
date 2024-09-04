@@ -51,7 +51,7 @@ There's an interesting function here named execbash, let's disassemble it and se
 
 Interesting - this looks like our function. Let's set a break point on Main and then pause right before the call to remove. We can do this with ``break main``, resuming the execution flow with ``c`` and then once our breakpoint is hit, ``break remove@plt``. Alternatively, we could have done \*0xD34DB33F (or whatever the memory address would be).
 
-![[Pasted image 20240903233559.png]](https://blog.spookysec.net/img/Pasted image 20240903233559.png")
+![[Pasted image 20240903233559.png]](https://blog.spookysec.net/img/Pasted image 20240903233559.png)
 Opening up another Terminal, browsing to our directory location shows us the Update.log file exists, catting it reveals our flag :D
 
 ![[Pasted image 20240903233644.png]](https://blog.spookysec.net/img/Pasted image 20240903233644.png)
