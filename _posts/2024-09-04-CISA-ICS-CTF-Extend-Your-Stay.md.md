@@ -19,24 +19,24 @@ Okay, so we're given a Chrome Extension (.crx) and we now need to do some analyt
 
 Post-extracting, we're given a handful of files, one in particular stands out - **background.js**. This is likely where the extension source code is saved.
 
-![[Pasted image 20240904095605.png]]("https://blog.spookysec.net/img/Pasted image 20240904095605.png")
+![[Pasted image 20240904095605.png]](https://blog.spookysec.net/img/Pasted image 20240904095605.png)
 
 A quick overhead view of the file shows an obfuscated function, some code to go through each element and do some replacement work. Towards the end, there's a blob of Base64 that runs a aotb to decode the value and print the flag out.
 
-![[Pasted image 20240904095739.png]]("https://blog.spookysec.net/img/Pasted image 20240904095739.png")
+![[Pasted image 20240904095739.png]](https://blog.spookysec.net/img/Pasted image 20240904095739.png)
 
 Opening up Chrome's Dev tools, we can paste the code in there and retrieve the flag **flag{hyp3r3xt3nd3d}**!
 
-![[Pasted image 20240904095900.png]]("https://blog.spookysec.net/img/Pasted image 20240904095900.png")
+![[Pasted image 20240904095900.png]](https://blog.spookysec.net/img/Pasted image 20240904095900.png)
 
 ### Extend Your Stay 2
 Now, it's stated that some links are being hijacked and are redirecting users to a similar looking URL controlled by attackers. Let's take a look at that obfuscated JavaScript we neglected before.
 
-![[Pasted image 20240904100147.png]]("https://blog.spookysec.net/img/Pasted image 20240904100147.png")
+![[Pasted image 20240904100147.png]](https://blog.spookysec.net/img/Pasted image 20240904100147.png)
 
 Replacing every ``;`` with a ``;\n`` gives us much more readable code with a couple of Base64 notes. Let's take a quick stab at decoding them and see if we can find anything useful.
 
-![[Pasted image 20240904100421.png]]("https://blog.spookysec.net/img/Pasted image 20240904100421.png")
+![[Pasted image 20240904100421.png]](https://blog.spookysec.net/img/Pasted image 20240904100421.png)
 
 Well, that certainly looks useful. This time we're given the flag of ``https://www.fellswargo.com/``. Neat! 
 
@@ -45,18 +45,18 @@ Some of the Virbank staff are big bird watchers and they've installed even  more
 
 We'll repeat the same process as unpacking the extension as last time and take a peak at background.js.
 
-![[Pasted image 20240904100917.png]]("https://blog.spookysec.net/img/Pasted image 20240904100917.png")
+![[Pasted image 20240904100917.png]](https://blog.spookysec.net/img/Pasted image 20240904100917.png)
 
 There's some interesting regular expressions in the addon here - One looks about the same length as a card number with 5 as a starting prefix (interesting). Two digits separated by a /, and lastly 3 digits. Some quick Googling shows that **MasterCards** appear to start with 5, so MasterCards are specifically being targeted here, how specific :think: Maybehaps a coordinated attack? 
 
-![[Pasted image 20240904101239.png]]("https://blog.spookysec.net/img/Pasted image 20240904101239.png")
+![[Pasted image 20240904101239.png]](https://blog.spookysec.net/img/Pasted image 20240904101239.png)
 
 ### Extend Your Stay 4
 Lastly, Virbank staff want to know where exactly this data is exfiltrated to. A good question! 
 
 I prefer Dynamic analysis in this situation - So I'll fire up Burpsuite, open up the built in Chrome browser and install this add-on. Upon launching it we can see that there is a connection request sent out tooooooo...... ```https://www.b1rds.info```!
 
-![[Pasted image 20240904101833.png]]("https://blog.spookysec.net/img/Pasted image 20240904101833.png")
+![[Pasted image 20240904101833.png]](https://blog.spookysec.net/img/Pasted image 20240904101833.png)
 
 We've got our domain and can add it to the block-list. 
 
