@@ -19,7 +19,7 @@ Virbank Medical has recieved a call from Driftveil Police with news. Patient dat
 
 Okay! To do this challenge, we're going to need Volatility 3. This is an awesome forensics tool for analyzing memory dumps. I have to re-learn this tool pretty much every year because of how cool and useful it is. I love CTFs with these types of challenges, they're my absolute favorite. Since we know the key, we can run ``vol.py -f ./memdump.raw printkey --key 'SOFTWARE\ACME_XRAY'`` to dump the key, giving us the flag **flag{f33l1ng_v0l@t1l3}** - if we might consider running HiveList, HiveScan and other registry related utilities in Volatility to get a better lay of the system.
 
-![[Pasted image 20240904103253.png]]("https://blog.spookysec.net/img/Pasted image 20240904103253.png")
+![[Pasted image 20240904103253.png]]("https://blog.spookysec.net/img/Pasted image 20240904103253.png)
 
 ### Read Askew Manuscripts 2
 Next, we're informed the thief tried to upload the stolen patient data to the cloud :( However, the X-Ray machine was not allowed to access the internet. We're tasked with trying to identify the password they used to try to login to the site with. To do so, we're going to want to list the running processes. We can do this with ``vol.py -f ./memdump.raw windows.pslist.PsList``. This time we can see a couple of interesting processes running. Notepad.exe and IEXPLORE.exe
