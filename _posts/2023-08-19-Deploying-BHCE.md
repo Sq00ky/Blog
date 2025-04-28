@@ -44,7 +44,7 @@ Note: *that some sections might be a little bit longer and exact steps may chang
 
 ### Deploying BloodHound Community Edition
 Before we begin, some pre-requisites are required:
-- A Linux Server 
+- A Linux *or* Windows Server (We'll be using Linux) 
 - Network Access
 - Docker/Docker-Compose
   
@@ -52,32 +52,24 @@ That's pretty much it! As long as you have those things, you should be able to g
 ```
 apt install docker-compose
 ```
-This will install Docker-Compose, Docker, and all it's dependencies. Next, we'll want to pull down two files from the **SpecterOps BloodHound** repository, it can be found [here](https://github.com/SpecterOps/BloodHound). Be careful not to confuse it with the BloodHoundAD BloodHound repository. That repository will soon be archived and will no longer be supported. Anyways - continuing on. From the repo, we want to grab the following files:
-- [Docker-Compose.yml](https://github.com/SpecterOps/BloodHound/blob/main/examples/docker-compose/docker-compose.yml)
-- [BloodHound.config.json](https://github.com/SpecterOps/BloodHound/blob/main/examples/docker-compose/bloodhound.config.json)
 
-I recommend creating a new folder in ``/opt/`` called "BloodHound" to store these files, alternatively, you can just clone the whole repository and copy the BloodHound.config.file. This can be done with the following commands:
-```bash
-git clone https://github.com/SpecterOps/BloodHound.git /opt/BloodHound
-cd /opt/BloodHound/
-cp examples/docker-compose/* ./
+This will install Docker-Compose, Docker, and all it's dependencies. As of 2025, the installation instructions have changed slightly to make it easier to rapidly deploy BloodHound Community. This can now be done with a tool called **BloodHound-CLI**, it can be downloaded here:
+
 ```
-For a single user, initial deployment this will suffice and give us everything we need. It doesn't really scale for multi-user deployments, however. We'll cover that in the Deploying SSL/TLS section though.
+mkdir /opt/bloodhound && cd /opt/bloodhound && wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz && tar -xzf ./bloodhound-cli-linux-amd64.tar.gz && rm bloodhound-cli-linux-amd64.tar.gz
+```
+*Please note that installation instructions for Windows and ARM systems may vary. For updated installation instructions, please refer to the [BloodHound Community Edition Quickstart guide by SpecterOps](https://bloodhound.specterops.io/get-started/quickstart/community-edition-quickstart)*
 
-As stated before, for a single user initial deployment, this will give us everything we need. We can start BloodHound with the following command:
-```bash
-docker-compose up
+This command will download BH-CLI into the /opt/bloodhound folder. This tool enables you to do all sorts of cool stuff, so if you're not handy with Docker (Like me!), you can easily update BloodHound, start/stop it, display logs, reset the admin password, and more. You can check out the full functionality with the ``./bloodhound-cli --help`` command.
+
+To get BloodHound up and running, simply run:
+```
+./bloodhound-cli install
 ```
 
-This will then begin downloading the required containers from docker.io, please note this may take a few minutes.
+And that's it! You'll be up and running, the admin password will be provided in the terminal output for you to login with.  If, for some reason it does not show up for you, you can fetch the password with ``./bloodhound-cli config get default_password``
 
-![[Pasted image 20230819233649.png]](https://blog.spookysec.net/img/Pasted image 20230819233649.png)
-
-The Deployment will be complete when you see an initial password displayed on the screen. This will be the password for the Administrator user account. 
-
-![[Pasted image 20230819234338.png]](https://blog.spookysec.net/img/Pasted image 20230819234338.png)
-
-You will now be able to login with the initial set password. 
+For a single user deployment this will suffice and give us everything we need to get started. It doesn't really scale for multi-user deployments, however. We'll cover that in the Deploying SSL/TLS section though.
 
 ![[Pasted image 20230819235407.png]](https://blog.spookysec.net/img/Pasted image 20230819235407.png)
 
@@ -88,34 +80,46 @@ Upon logging in, you will be prompted to change the default password. This passw
 
 Something super important to note is this may expose you to potential attacks. Often BloodHound may be used on hostile networks like HackTheBox, TryHackMe, or another environment, so additional hardening steps may be a good idea. I'm going to run with this to show you a **basic** modification of the config files - later we'll deploy SSL/TLS.
 
-If you are using this for you and you only, it may be worth modifying the config file to bind to 127.0.0.1 instead of 0.0.0.0. This can be done by modifying the Bloodhound.config.json file in /opt/BloodHound.
+If you are using this for you and you only, it may be worth modifying the config file to bind to **127.0.0.1** instead of **0.0.0.0**. This can be done by modifying the Bloodhound.config.json file in /opt/BloodHound.
 
 ```json
 {
-  "version": 1,
-  "bind_addr": "127.0.0.1:8080", 
+  "bind_addr": "127.0.0.1:8080",
+  "collectors_base_path": "/etc/bloodhound/collectors",
+  "default_admin": {
+    "password": "...",
+    "principal_name": "admin"
   ...
-    "last_name": "Admin",
-    "email_address": "spam@example.com"
-  }
+  "tls": {
+    "cert_file": "",
+    "key_file": ""
+  },
+  "version": 1,
+  "work_dir": "/opt/bloodhound/work"
 }
 ```
 
 We will also have to modify the Docker-Compose.yml file. Note that by default a config file is not specified. We want to uncomment these lines so our config file is used. 
 ![[Pasted image 20230819235200.png]](https://blog.spookysec.net/img/Pasted image 20230819235200.png)
 
-After uncommenting the lines, we can restart the Docker container by pressing ctrl+c to kill the process. Afterwards, we can re-execute ``docker-compose up``, and the container will restart. 
+After uncommenting the lines, we can restart the Docker container by pressing ctrl+c to kill the process. Afterwards, we can re-execute ``./bloodhounc-cli containers up``, and the container will restart. 
 ![[Pasted image 20230820000230.png]](https://blog.spookysec.net/img/Pasted image 20230820000230.png)
 Now, if an attacker tries to connect to our BloodHound instance, they will be unable to do so. Keep this in mind while working within hostile environments! For the blog post, we are going to assume you're working with a **team** and not in an individual setting, so we're going to revert this config back to 0.0.0.0:8080. 
 
 ```json
 {
-  "version": 1,
   "bind_addr": "0.0.0.0:8080",
-...
-    "last_name": "Admin",
-    "email_address": "spam@example.com"
-  }
+  "collectors_base_path": "/etc/bloodhound/collectors",
+  "default_admin": {
+    "password": "...",
+    "principal_name": "admin"
+  ...
+  "tls": {
+    "cert_file": "",
+    "key_file": ""
+  },
+  "version": 1,
+  "work_dir": "/opt/bloodhound/work"
 }
 ```
 
@@ -126,20 +130,7 @@ As always, in a team setting it's bad practice to use the default Administrator 
 By default, there will be one user, Admin with the email spam@example.com. If you want to modify this, you can select the "hamburger" menu and select "Update User".
 ![[Pasted image 20230820001330.png]](https://blog.spookysec.net/img/Pasted image 20230820001330.png)
 
-Additionally, this is also modifiable in the BloodHound config file:
-```json
-...
-  "collectors_base_path": "/etc/bloodhound/collectors",
-  "default_admin": {
-    "principal_name": "admin",
-    "first_name": "Bloodhound",
-    "last_name": "Admin",
-    "email_address": "spam@example.com"
-  } 
-}
-```
-
-Back to the web application, selecting "Create User" will open a new dialogue box:
+Selecting "Create User" will open a new dialogue box:
 ![[Pasted image 20230820001629.png]](https://blog.spookysec.net/img/Pasted image 20230820001629.png)
 
 In here, we can assign one of four roles, Read Only, Upload Only, User and Administrator. Note that currently the User role does not have permission to upload files. This may be a misconfiguration, so for the time being, I would recommend having a dedicated user account to upload files as Administrator is **very** broad permission wise. For a single user deployment, Administrator should be fine, if you're working in a team, I would opt for a dedicated File Upload role. This process can be repeated for each member of the team. 
@@ -181,14 +172,11 @@ I recommend placing these files in a location other than /opt/BloodHound, though
 
 ```json
 ...
-  "features": {
-    "enable_auth": true
-  },
+
   "tls": {
     "cert_file": "/opt/bloodhound/cert.cer",
     "key_file": "/opt/bloodhound/cert.pem"
-  },
-  "database": {
+    },
 ...
 ```
 
@@ -206,7 +194,7 @@ This is because the files are **not** on the containers filesystem - only on the
 
 This is going to share **all** the files in /opt/BloodHound to /opt/bloodhound on the docker container. So note that if you have **any** sensitive files in this directory, they can be accessible in this directory, individual files can be shared as well, which may be more preferable. Note in the above line we can specify this as Read Only which makes it *slightly* more secure.
 
-Anyways - security rant concerns aside, after saving this file and putting the certificates in /opt/bloodhound/ and having them named cert.cer/cert.pem (or whatever you would like to name them), we can restart the server. Once again, this can be done by ctrl+c to stop the process and re-running ``docker-compose up``.  Now, you should see our site is served with an SSL certificate! Our communications between us and the site are now encrypted. Note that I'm using a self-signed SSL cert for our demo here. I'm not trying to make things overly complex, though you should use a signed/trusted certificate in production.
+Anyways - security rant concerns aside, after saving this file and putting the certificates in /opt/bloodhound/ and having them named cert.cer/cert.pem (or whatever you would like to name them), we can restart the server. Once again, this can be done by ctrl+c to stop the process and re-running ``./bloodhound-cli containers up``.  Now, you should see our site is served with an SSL certificate! Our communications between us and the site are now encrypted. Note that I'm using a self-signed SSL cert for our demo here. I'm not trying to make things overly complex, though you should use a signed/trusted certificate in production.
 
 ![[Pasted image 20230820010540.png]](https://blog.spookysec.net/img/Pasted image 20230820010540.png)
 And that's it, we now have HTTPS!
@@ -218,24 +206,30 @@ While we're on the topic of best practices, there's a few things that I think ar
 	- PostgreSQL suffers the same issue
  - Binding to a specific interface's IP address instead of quad 0 may be better if you don't want to bind to your loopback interface.
 
-### Backgrounding Docker
-This is our last section - Backgrounding our docker container. We've made a lot of good configuration changes. Don't be like me, go away for lunch, shut the laptop and one of your coworkers tries to access the BHCE instance and it's not working. Why's that? The SSH connection to your BHCE server was terminated!
+### Updating BHCE
+With the BloodHound-CLI change, it's much easier to update BHCE now, by simply running ``./bloodhound-cli update`` command, BloodHound will attempt to fetch the latest versions of the containers from the docker registry. If for some reason this fails, you can always use the ``docker-compose pull`` command to update them as well.
+### Managing the Docker Containers
+This is our last section - As of the BloodHound-CLI change, SpecterOps has made it super easy to manage the docker containers using the bloodhound-cli app. To start and stop the containers, we can run the following commands:
 
-To prevent this, we're going to detach the container by stopping the container and restarting it with the following command:
-```bash
-docker-compose up -d
+```
+./bloodhound-cli containers stop #This will stop our containers
+./bloodhound-cli containers start #This will start our containers
 ```
 
-This will start BHCE as a backgrounded process:
-![[Pasted image 20230820011455.png]](https://blog.spookysec.net/img/Pasted image 20230820011455.png)
+If you need to bring all of the containers down, remove them and rebuild then (sometimes useful for updates), you can use the following:
 
-If you make a change and need to restart one of the containers, or shut them down for some reason, you can run the following command to shutdown the container:
 ```
-docker-compose down
+./bloodhound-cli containers down # This will bring down and destroy the containers
+./bloodhound-cli containers up # This will rebuild a fresh copy of the containers
 ```
 
-I recommend creating some aliases to do this just to expedite the process, especially if you're not a Docker power-user. This is my first real experience with using Docker and it's been a bit of a struggle, so I thought I'd share some of the things I learned just to help make your all's life a little bit easier.
+If something happens where BloodHound-CLI isn't working as expected, manual management of the containers can be done with the Docker-Compose commands as well. I would highly recommend reaching out in the Slack Channel if you come across any issues. No tool is perfect, so if you run into any bugs or have any questions, make sure you reach out - https://ghst.ly/BHSlack 
 
-Anyways, I hope this helps :D
+```
+docker-compose up -d # This will bring the containers up and daemonize them
+docker-compose down # This will bring the containers down
+```
+
+I hope this helps :D
 
 ~ Ronnie
