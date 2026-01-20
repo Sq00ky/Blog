@@ -86,7 +86,7 @@ Submitting bogus information to the login portal shows a POST request being sent
 
 After a login portal, the victim is then directed to a CSC (Card Security Code) verification page, likely served as a way to harvest additional information related to the account used to make changes. American Express uses a CID on the front of the card for standard purchases, potentially revealing the adversaries intentions on wanting to make changes to the account itself, however, they will need the additional card information to do so. 
 
-![Screenshot 2026-01-02 (https://blog.spookysec.net/img/Screenshot 2026-01-02)23419.png]]
+![Screenshot 2026-01-02 223419.png](https://blog.spookysec.net/img/Screenshot 2026-01-02 223419.png)
 
 After submitting bogus information, another POST request is sent by the browser with a JSON response confirming the CSC was sent.
 
