@@ -159,11 +159,4 @@ Despite that, while reviewing the campaign, we did observe some interesting tech
 
 ### Indicators of Compromise
 
-**Domains:**
-jinkoukt.com
-okwin77slot.com
-digitaltclinic.com
-**Emails:**
-AmExpressOnline-VICTIM@secure.net
-**IPs:**
-204.199.139.130
+**Domains:**<br>jinkoukt.com<br>okwin77slot.com<br>digitaltclinic.com<br>**Emails:**<br>AmExpressOnline-VICTIM@secure.net<br>**IPs:**<br>204.199.139.130
