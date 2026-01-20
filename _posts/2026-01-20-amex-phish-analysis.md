@@ -11,7 +11,7 @@ tags:
   - DFIR
 comments: true
 published: true
-date: 2025-01-20
+date: 2026-01-20
 ---
 **This post was written as part of my internship with SANS Internet Storm Center.**
 
