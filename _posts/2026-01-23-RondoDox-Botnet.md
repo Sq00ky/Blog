@@ -1,3 +1,19 @@
+---
+layout: post
+title: Analyzing the Rondodox Botnet from a DShield Sensor
+gh-badge:
+  - star
+  - fork
+  - follow
+tags:
+  - Analysis
+  - Botnet
+  - Web
+  - DFIR
+comments: true
+published: true
+date: 2025-01-23
+---
 **This post was written as part of my internship with SANS Internet Storm Center.**
 
 Through November 20 and November 21, 2025, automated vulnerability scanning was identified against the DShield Honeypot from 192[.]159[.]99[.]95 with the goal of gaining remote code execution against potential victims. These probing and scanning activities stood out as interesting as some POST requests were observed attempting to pull down a stage to execute code on the system from a second server (74[.]194[.]191[.]52). A shell script that would have been executed on the system was successfully recovered, and the second stage x86 binary that would be executed on the system.
