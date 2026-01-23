@@ -20,8 +20,7 @@ Through November 20 and November 21, 2025, automated vulnerability scanning was 
 
 Three key identifiers can be used for threat hunting:
 
-1. "rondo" plus 3 random letters plus a file extension, which can be matched with this RegEx:
-**rondo\.[a-z]{3}\.sh**
+1. "rondo" plus 3 random letters plus a file extension, which can be matched with this RegEx:<br>**rondo\.[a-z]{3}\.sh**
 2. The user agent “bang2013@atomicmail.io” was observed in 13 HTTP request
 3. The user agent “rondo2012@atomicmail.io” was observed in the remaining 108 HTTP requests
 
