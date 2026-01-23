@@ -28,14 +28,14 @@ Three key identifiers can be used for threat hunting:
 
 Two IP Addresses were identified during analysis of this probing and exploitation attempt, 192.159.99.95 and 74.194.191.52.
 
-**192.159.99.95 -**
+**192.159.99.95 -**<br>
 Overall, this IP Address was found to be known for malicious exploitation attempts against various hosts. The ASN attributed to the hosting provider is known as “1337 Services”, the same hosting provider used to host the darkweb forum “cracked[.]to”. In addition, the cloud compute provider owning the IP Address is a “Privacy Focused Hosting Provider”, likely a “Bulletproof hosting provider”. Various clear-web sources indicate that 1337 Services, and rdp.sh, may have been linked to notorious e-crime threat actors. [Brian Krebs reported on a takedown back in February, 2025 related to this cloud compute provider, being attributed to e-crime.](https://krebsonsecurity.com/2025/02/whos-behind-the-seized-forums-cracked-nulled/)
 
 ![[Pasted image 20260123010526.png]](https://blog.spookysec.net/img/Pasted image 20260123010526.png)
 
 ![[Pasted image 20260123010608.png]](https://blog.spookysec.net/img/Pasted image 20260123010608.png)
 
-**74.194.191.52 –**
+**74.194.191.52 –**<br>
 This IP Address was flagged a bit higher in terms of maliciousness as it’s primarily used for the second stage to establish C2. Any malware extracted from honeypots would point to this server.
 ![[Pasted image 20260123010554.png]](https://blog.spookysec.net/img/Pasted image 20260123010554.png)
 
